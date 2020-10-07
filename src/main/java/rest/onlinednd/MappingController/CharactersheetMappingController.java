@@ -1,5 +1,6 @@
 package rest.onlinednd.MappingController;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
@@ -13,8 +14,9 @@ import java.util.Optional;
 public class CharactersheetMappingController {
 
 
+    @Autowired
     CharactersheetRepository charactersheetRepository;
-/*
+
     //GET Methoden___________________________________________________
 
     @GetMapping("/{charid}")
@@ -33,7 +35,8 @@ public class CharactersheetMappingController {
     public @ResponseBody String postCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel) {
         Charactersheet charactersheet = new Charactersheet();
 
-        if(charactersheetViewModel == null) {
+        String returnString;
+        if(charactersheetViewModel != null) {
             charactersheet.setLevel(charactersheetViewModel.getLevel());
             charactersheet.setArmorClass(charactersheetViewModel.getArmorClass());
             charactersheet.setCharacterName(charactersheetViewModel.getCharacterName());
@@ -41,30 +44,43 @@ public class CharactersheetMappingController {
             charactersheet.setPassivePerception(charactersheetViewModel.getPassivePerception());
             charactersheet.setProficiencyBonus(charactersheetViewModel.getProficiencyBonus());
             charactersheet.setSpeed(charactersheetViewModel.getSpeed());
-            charactersheet.setVisible(charactersheetViewModel.isVisible());
+            charactersheet.setSheetIsVisible(charactersheetViewModel.isSheetIsVisible());
+            charactersheet.setGroupID(charactersheetViewModel.getGroupID());
+
+//
+//            switch (charactersheetViewModel.race) {
+//                case 0:
+//                    charactersheet.setRace(new Dwarf());
+//            }
+//            for (SkillsModel s : charactersheetViewModel.skillsModel) {
+//                switch (s) {
+//                    case athletics:
+//                        charactersheet.getSkills().getStrengthSkills().setAthletics_prof(true);
+//                    case deception:
+//                        charactersheet.getSkills().getCharismaSkills().setDeception_prof(true);
+//                }
+//            }
+//            switch (charactersheetViewModel.aclass) {
+//                case 0:
+//                    charactersheet.setaClass(new Fighter());
+//            }
+//            charactersheet.setLevel(charactersheetViewModel.level);
+
+
+
+            charactersheetRepository.save(charactersheet);
+            returnString ="Charakterbogen erstellt";
         }
 
-//        switch (charactersheetViewModel.race) {
-//            case 0:
-//                charactersheet.setRace(new Dwarf());
-//        }
-//        for (SkillsModel s : charactersheetViewModel.skillsModel) {
-//            switch (s) {
-//                case athletics:
-//                    charactersheet.getSkills().getStrengthSkills().setAthletics_prof(true);
-//                case deception:
-//                    charactersheet.getSkills().getCharismaSkills().setDeception_prof(true);
-//            }
-//        }
-//        switch (charactersheetViewModel.aclass) {
-//            case 0:
-//                charactersheet.setaClass(new Fighter());
-//        }
-//        charactersheet.setLevel(charactersheetViewModel.level);
-//
-//
-        charactersheetRepository.save(charactersheet);
-        return "Charakterbogen erstellt";
+        else
+            returnString = "Nichts gespeichert!";
+
+
+
+
+
+
+        return returnString;
     }
 
 /*

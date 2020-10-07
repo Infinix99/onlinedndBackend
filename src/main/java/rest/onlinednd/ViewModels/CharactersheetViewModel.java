@@ -11,8 +11,8 @@ public class CharactersheetViewModel {
     private int speed;
     private int passivePerception;
     private int level;
-    private boolean isVisible;
-    private int group;
+    private boolean sheetIsVisible;
+    private int groupID;
 
     //private Stats stats;
 
@@ -80,19 +80,19 @@ public class CharactersheetViewModel {
         this.level = level;
     }
 
-    public boolean isVisible() {
-        return isVisible;
+    public boolean isSheetIsVisible() {
+        return sheetIsVisible;
     }
 
-    public void setVisible(boolean visible) {
-        isVisible = visible;
+    public void setSheetIsVisible(boolean visible) {
+        sheetIsVisible = visible;
     }
 
-    public int getGroup() {
-        return group;
+    public int getGroupID() {
+        return groupID;
     }
 
-    public void setGroup(int group) {
-        this.group = group;
+    public void setGroupID(int group) {
+        this.groupID = group;
     }
 }

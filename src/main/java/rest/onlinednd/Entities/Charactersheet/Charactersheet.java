@@ -1,11 +1,9 @@
 package rest.onlinednd.Entities.Charactersheet;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table
 public class Charactersheet {
 
     private String characterName;
@@ -14,14 +12,13 @@ public class Charactersheet {
     private int proficiencyBonus;
     private int speed;
     private int passivePerception;
-    //private boolean[] deathSaves = new boolean[6];
     private int level;
-    private boolean isVisible;
-    private int group;
+    private boolean sheetIsVisible;
+    private int groupID;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer charID;
+    private Integer charactersheetID;
 
 
 //    private Stats stats;
@@ -118,24 +115,24 @@ public class Charactersheet {
         this.level = level;
     }
 
-    public boolean isVisible() {
-        return isVisible;
+    public boolean isSheetIsVisible() {
+        return sheetIsVisible;
     }
 
-    public void setVisible(boolean visible) {
-        isVisible = visible;
+    public void setSheetIsVisible(boolean visible) {
+        sheetIsVisible = visible;
     }
 
-    public Integer getCharID() {
-        return charID;
+    public Integer getCharactersheetID() {
+        return charactersheetID;
     }
 
-    public int getGroup() {
-        return group;
+    public int getGroupID() {
+        return groupID;
     }
 
-    public void setGroup(int group) {
-        this.group = group;
+    public void setGroupID(int groupID) {
+        this.groupID = groupID;
     }
 
 
