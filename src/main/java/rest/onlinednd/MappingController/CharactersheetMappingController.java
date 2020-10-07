@@ -46,6 +46,7 @@ public class CharactersheetMappingController {
             charactersheet.setSpeed(charactersheetViewModel.getSpeed());
             charactersheet.setSheetIsVisible(charactersheetViewModel.isSheetIsVisible());
             charactersheet.setGroupID(charactersheetViewModel.getGroupID());
+            charactersheet.setStats(charactersheetViewModel.getStats());
 
 //
 //            switch (charactersheetViewModel.race) {

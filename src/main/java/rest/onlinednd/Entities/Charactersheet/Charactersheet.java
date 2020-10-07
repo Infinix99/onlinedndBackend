@@ -21,6 +21,9 @@ public class Charactersheet {
     private Integer charactersheetID;
 
 
+
+
+
 //    private Stats stats;
 //    private Skills skills;
 //    private SavingThrows savingThrows;
@@ -135,5 +138,17 @@ public class Charactersheet {
         this.groupID = groupID;
     }
 
+    //________________FORGEIN KEY's___________________\\
 
+    @OneToOne
+    @JoinColumn
+    private Stats stats;
+
+    public Stats getStats() {
+        return stats;
+    }
+
+    public void setStats(Stats stats) {
+        this.stats = stats;
+    }
 }

@@ -14,7 +14,7 @@ public class CharactersheetViewModel {
     private boolean sheetIsVisible;
     private int groupID;
 
-    //private Stats stats;
+    private Stats stats;
 
     public CharactersheetViewModel() {
     }
@@ -94,5 +94,13 @@ public class CharactersheetViewModel {
 
     public void setGroupID(int group) {
         this.groupID = group;
+    }
+
+    public Stats getStats() {
+        return stats;
+    }
+
+    public void setStats(Stats stats) {
+        this.stats = stats;
     }
 }
