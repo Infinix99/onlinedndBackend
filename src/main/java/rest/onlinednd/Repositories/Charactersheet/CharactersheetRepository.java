@@ -1,4 +1,8 @@
 package rest.onlinednd.Repositories.Charactersheet;
 
-public class CharactersheetRepository {
+import org.springframework.data.repository.CrudRepository;
+import rest.onlinednd.Entities.Charactersheet.Charactersheet;
+
+public interface CharactersheetRepository extends CrudRepository<Charactersheet, Integer> {
+
 }

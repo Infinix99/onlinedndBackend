@@ -1,11 +1,11 @@
 package rest.onlinednd.MappingController;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.User;
 import rest.onlinednd.Repositories.UserRepository;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1.0/User")
@@ -16,11 +16,11 @@ public class UserMappingController {
     private UserRepository userRepository;
 
 
-//    @GetMapping("/{id}")
-//    public @ResponseBody User getUser(@PathVariable int id) {
-//
-//        return new User();
-//    }
+    @GetMapping("/{id}")
+    public @ResponseBody
+    Optional<User> getUser(@PathVariable int id) {
+        return userRepository.findById(id);
+    }
 
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAllUsers() {
@@ -29,6 +29,7 @@ public class UserMappingController {
     }
 
     @PostMapping(
+            path = "/register"
             //consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     //@ResponseStatus(HttpStatus.OK)
@@ -36,7 +37,7 @@ public class UserMappingController {
         if(user != null)
             userRepository.save(user);
 
-        return "Account : "  + " wurde angelegt";
+        return "Account " + user.getName() + " wurde angelegt";
     }
 
 //    @PostMapping(

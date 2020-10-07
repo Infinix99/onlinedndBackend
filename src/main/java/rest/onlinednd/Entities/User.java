@@ -1,9 +1,8 @@
 package rest.onlinednd.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
+
+import javax.persistence.*;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
@@ -14,6 +13,12 @@ public class User {
     private String name;
 
     private String email;
+
+    /*
+    @ManyToOne
+    @JoinColumn//(name = "charBucketID")
+    private CharctersheetBucket charactersheetBucket;
+*/
 
     public Integer getId() {
         return id;

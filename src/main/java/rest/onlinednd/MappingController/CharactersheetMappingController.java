@@ -3,27 +3,47 @@ package rest.onlinednd.MappingController;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
+import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
+import rest.onlinednd.ViewModels.CharactersheetViewModel;
 
-//@RestController
-//@RequestMapping("/api/v1.0/User/{id}/Group/{groupid}/Charactersheet")
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/v1.0/User/{id}/Group/{groupid}/Charactersheet")
 public class CharactersheetMappingController {
 
+
+    CharactersheetRepository charactersheetRepository;
 /*
     //GET Methoden___________________________________________________
 
     @GetMapping("/{charid}")
-    public Charactersheet getCharactersheet(@PathVariable int id, @PathVariable int groupid, @PathVariable int charid) {
+    public @ResponseBody
+    Optional<Charactersheet> getCharactersheet(@PathVariable int id, @PathVariable int groupid, @PathVariable int charid) {
 
-        return new Charactersheet();
+        return charactersheetRepository.findById(charid);
     }
+
 
     //POST Methoden_________________________________________________
 
     @PostMapping(
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
+
     )
-    public String postCharactersheet(@RequestBody Charactersheet charactersheet) {
-//        Charactersheet charactersheet = new Charactersheet();
+    public @ResponseBody String postCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel) {
+        Charactersheet charactersheet = new Charactersheet();
+
+        if(charactersheetViewModel == null) {
+            charactersheet.setLevel(charactersheetViewModel.getLevel());
+            charactersheet.setArmorClass(charactersheetViewModel.getArmorClass());
+            charactersheet.setCharacterName(charactersheetViewModel.getCharacterName());
+            charactersheet.setInitiative(charactersheetViewModel.getInitiative());
+            charactersheet.setPassivePerception(charactersheetViewModel.getPassivePerception());
+            charactersheet.setProficiencyBonus(charactersheetViewModel.getProficiencyBonus());
+            charactersheet.setSpeed(charactersheetViewModel.getSpeed());
+            charactersheet.setVisible(charactersheetViewModel.isVisible());
+        }
+
 //        switch (charactersheetViewModel.race) {
 //            case 0:
 //                charactersheet.setRace(new Dwarf());
@@ -43,10 +63,11 @@ public class CharactersheetMappingController {
 //        charactersheet.setLevel(charactersheetViewModel.level);
 //
 //
+        charactersheetRepository.save(charactersheet);
         return "Charakterbogen erstellt";
     }
 
-
+/*
     //PUT Methoden__________________________________________________
 
     //PUT ON DIFFRENT ENDPOINTS
