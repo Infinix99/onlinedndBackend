@@ -91,16 +91,12 @@ public class CharactersheetMappingController {
     }
 
 
+    //ALEXA-GETTERS_________________________________________________
 
-    //PUT Methoden__________________________________________________
+    @PostMapping("/{charid}")
+    public AlexaRO getGames(@RequestBody AlexaRO alexaRO, @PathVariable int id, @PathVariable int groupid, @PathVariable int charid) {
 
-
-
-                //PreBuild - Alexa
-                @PostMapping("/{charid}")
-                    public AlexaRO getGames(@RequestBody AlexaRO alexaRO, @PathVariable int id, @PathVariable int groupid, @PathVariable int charid) {
-
-                        String outText = "";
+        String outText = "";
 
                         /*if (alexaRO.getRequest().getType().equalsIgnoreCase("LaunchRequest"))
                             {
@@ -110,36 +106,36 @@ public class CharactersheetMappingController {
                             else {
 
                          */
-                            if (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                                    (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("GetCurrentHitPoints"))) {
-                                try {
-                                    // outText = outText + "du hast aktuell " + charactersheetRepository.findAllById(charid) + "Hit Points";   GETTER HITPOINTS
-                                } catch (Exception e) {
-                                    outText = "Unser REST-Server hat leider aktuell Probleme. Bitte Versuch es später noch einmal ";
-                                }
-                                prepareResponse(alexaRO, outText, true);
+        if (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
+                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("GetCurrentHitPoints"))) {
+            try {
+                //outText = outText + "du hast aktuell " + //QueryFür "CurrentHitPoints" UNTER Life -> Hitpoints -> *Attribute* int currentHitPoints//  + "Hit Points";
+            } catch (Exception e) {
+                outText = "Unser REST-Server hat leider aktuell Probleme. Bitte Versuch es später noch einmal ";
+            }
+            prepareResponse(alexaRO, outText, true);
 
-                            }
-                            else { // Weitere GETS
+        }
+        else { // Weitere GETS
 
-                            }
-                        return alexaRO;
-                    }
-                    private AlexaRO prepareResponse(AlexaRO alexaRO, String outText, boolean shouldEndSession) {
+        }
+        return alexaRO;
+    }
+    private AlexaRO prepareResponse(AlexaRO alexaRO, String outText, boolean shouldEndSession) {
 
-                        alexaRO.setRequest(null);
-                        alexaRO.setSession(null);
-                        alexaRO.setContext(null);
-                        OutputSpeechRO outputSpeechRO = new OutputSpeechRO();
-                        outputSpeechRO.setType("PlainText");
-                        outputSpeechRO.setText(outText);
-                        ResponseRO response = new ResponseRO(outputSpeechRO, shouldEndSession);
-                        alexaRO.setResponse(response);
-                        return alexaRO;
-                    }
+        alexaRO.setRequest(null);
+        alexaRO.setSession(null);
+        alexaRO.setContext(null);
+        OutputSpeechRO outputSpeechRO = new OutputSpeechRO();
+        outputSpeechRO.setType("PlainText");
+        outputSpeechRO.setText(outText);
+        ResponseRO response = new ResponseRO(outputSpeechRO, shouldEndSession);
+        alexaRO.setResponse(response);
+        return alexaRO;
+    }
 
 
-
+    //PUT Methoden__________________________________________________
 
 /*
     @PutMapping(
