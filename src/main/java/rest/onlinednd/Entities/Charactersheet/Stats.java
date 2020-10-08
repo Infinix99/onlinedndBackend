@@ -5,7 +5,8 @@ import javax.persistence.*;
 @Entity
 public class Stats {
 
-    @OneToOne(cascade=CascadeType.ALL, mappedBy="stats",targetEntity=Charactersheet.class)
+    //@OneToOne(cascade=CascadeType.ALL, mappedBy="stats",targetEntity=Charactersheet.class)
+
 
     private int strength;
     private int dexterity;

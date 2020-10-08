@@ -41,8 +41,8 @@ public class Charactersheet {
 //    private HitPoints hitPoints;
 //    private HitDice hitDice;
 //
-//    public Charactersheet() {
-//        stats = new Stats();
+   public Charactersheet() {
+        stats = new Stats();
 //        proficiencyBonus = 2;
 //        skills = new Skills();
 //        languageProficiencies = new LanguageProficiencies();
@@ -56,7 +56,7 @@ public class Charactersheet {
 //        equipment = new Equipment();
 //        toolProficiencies = new ToolProficiencies();
 //        treasure = new Treasure();
-//    }
+   }
 
 
     //Getter and Setter______________________
@@ -140,8 +140,10 @@ public class Charactersheet {
 
     //________________FORGEIN KEY's___________________\\
 
+    //@OneToOne(targetEntity = Stats.class )
+    //@JoinColumn(name = "stats_statsid")
     @OneToOne
-    @JoinColumn
+    @JoinColumn(name = "staasfgag")
     private Stats stats;
 
     public Stats getStats() {
