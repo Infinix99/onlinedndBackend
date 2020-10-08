@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
+import rest.onlinednd.Entities.Charactersheet.Stats;
 import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
 import rest.onlinednd.ViewModels.CharactersheetViewModel;
 
@@ -47,7 +48,7 @@ public class CharactersheetMappingController {
             charactersheet.setSheetIsVisible(charactersheetViewModel.isSheetIsVisible());
             charactersheet.setGroupID(charactersheetViewModel.getGroupID());
             charactersheet.setStats(charactersheetViewModel.getStats());
-
+//            charactersheet.setStats(new Stats());
 //
 //            switch (charactersheetViewModel.race) {
 //                case 0:

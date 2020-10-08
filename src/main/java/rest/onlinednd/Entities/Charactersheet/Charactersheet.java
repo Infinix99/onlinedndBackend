@@ -42,7 +42,7 @@ public class Charactersheet {
 //    private HitDice hitDice;
 //
    public Charactersheet() {
-        stats = new Stats();
+//        stats = new Stats();
 //        proficiencyBonus = 2;
 //        skills = new Skills();
 //        languageProficiencies = new LanguageProficiencies();
@@ -142,8 +142,8 @@ public class Charactersheet {
 
     //@OneToOne(targetEntity = Stats.class )
     //@JoinColumn(name = "stats_statsid")
-    @OneToOne
-    @JoinColumn(name = "staasfgag")
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
     private Stats stats;
 
     public Stats getStats() {
