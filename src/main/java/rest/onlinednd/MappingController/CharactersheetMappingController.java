@@ -3,6 +3,9 @@ package rest.onlinednd.MappingController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import rest.onlinednd.Alexa.model.AlexaRO;
+import rest.onlinednd.Alexa.model.OutputSpeechRO;
+import rest.onlinednd.Alexa.model.ResponseRO;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 import rest.onlinednd.Entities.Charactersheet.Skills;
 import rest.onlinednd.Entities.Charactersheet.Stats;
@@ -50,6 +53,7 @@ public class CharactersheetMappingController {
             charactersheet.setGroupID(charactersheetViewModel.getGroupID());
             charactersheet.setStats(charactersheetViewModel.getStats());
             charactersheet.setSkills(charactersheetViewModel.getSkills());
+            //HitPoints
 //
 //            switch (charactersheetViewModel.race) {
 //                case 0:
@@ -86,21 +90,58 @@ public class CharactersheetMappingController {
         return returnString;
     }
 
-/*
+
+
     //PUT Methoden__________________________________________________
 
-    //PUT ON DIFFRENT ENDPOINTS
-
-    @PutMapping(
-            path = "/{charid}/stats",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
-    )
-    public void putStats(@PathVariable int charid, @RequestBody int strength) {
 
 
-    }
+                //PreBuild - Alexa
+                @PostMapping("/{charid}")
+                    public AlexaRO getGames(@RequestBody AlexaRO alexaRO, @PathVariable int id, @PathVariable int groupid, @PathVariable int charid) {
+
+                        String outText = "";
+
+                        /*if (alexaRO.getRequest().getType().equalsIgnoreCase("LaunchRequest"))
+                            {
+                            outText = outText + " ";
+                                prepareResponse(alexaRO, outText, false);
+                            }
+                            else {
+
+                         */
+                            if (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
+                                    (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("GetCurrentHitPoints"))) {
+                                try {
+                                    // outText = outText + "du hast aktuell " + charactersheetRepository.findAllById(charid) + "Hit Points";   GETTER HITPOINTS
+                                } catch (Exception e) {
+                                    outText = "Unser REST-Server hat leider aktuell Probleme. Bitte Versuch es später noch einmal ";
+                                }
+                                prepareResponse(alexaRO, outText, true);
+
+                            }
+                            else { // Weitere GETS
+
+                            }
+                        return alexaRO;
+                    }
+                    private AlexaRO prepareResponse(AlexaRO alexaRO, String outText, boolean shouldEndSession) {
+
+                        alexaRO.setRequest(null);
+                        alexaRO.setSession(null);
+                        alexaRO.setContext(null);
+                        OutputSpeechRO outputSpeechRO = new OutputSpeechRO();
+                        outputSpeechRO.setType("PlainText");
+                        outputSpeechRO.setText(outText);
+                        ResponseRO response = new ResponseRO(outputSpeechRO, shouldEndSession);
+                        alexaRO.setResponse(response);
+                        return alexaRO;
+                    }
 
 
+
+
+/*
     @PutMapping(
             path = "/{charid}/skills",
             consumes = {MediaType.APPLICATION_JSON_VALUE}
