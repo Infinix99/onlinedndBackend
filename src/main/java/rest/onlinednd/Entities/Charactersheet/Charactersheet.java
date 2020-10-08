@@ -24,15 +24,15 @@ public class Charactersheet {
 
 
 
-//    private Stats stats;
+
 //    private Skills skills;
 //    private SavingThrows savingThrows;
 //    private Spellcasting spellcasting;
-//    private Equipment equipment;
+//    private Equipment equipment;    --> Reicht als String
 //    private Treasure treasure;
 //    private FeaturesANDTraits featuresANDTraits;
-//    private Class aClass;
-//    private Race race;
+//    private Class aClass;    --> Reicht als String
+//    private Race race;        --> Reicht als String
 //    private CharacterDesc characterDescription;
 //    private ArmorProficiencies armorProficiencies;
 //    private LanguageProficiencies languageProficiencies;
@@ -153,4 +153,19 @@ public class Charactersheet {
     public void setStats(Stats stats) {
         this.stats = stats;
     }
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private Skills skills;
+
+    public Skills getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Skills skills) {
+        this.skills = skills;
+    }
+
+
+
 }

@@ -1,6 +1,7 @@
 package rest.onlinednd.ViewModels;
 
 
+import rest.onlinednd.Entities.Charactersheet.Skills;
 import rest.onlinednd.Entities.Charactersheet.Stats;
 
 public class CharactersheetViewModel {
@@ -15,6 +16,7 @@ public class CharactersheetViewModel {
     private int groupID;
 
     private Stats stats;
+    private Skills skills;
 
     public CharactersheetViewModel() {
     }
@@ -102,5 +104,13 @@ public class CharactersheetViewModel {
 
     public void setStats(Stats stats) {
         this.stats = stats;
+    }
+
+    public Skills getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Skills skills) {
+        this.skills = skills;
     }
 }
