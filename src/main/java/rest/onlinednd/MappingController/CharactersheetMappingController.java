@@ -56,6 +56,7 @@ public class CharactersheetMappingController {
             charactersheet.setTreasure(charactersheetViewModel.getTreasure());
             charactersheet.setCharacterDescription(charactersheetViewModel.getCharacterDescription());
             charactersheet.setArmorProficiencies(charactersheetViewModel.getArmorProficiencies());
+            charactersheet.setLanguageProficiencies(charactersheetViewModel.getLanguageProficiencies());
 
 //
 //            switch (charactersheetViewModel.race) {

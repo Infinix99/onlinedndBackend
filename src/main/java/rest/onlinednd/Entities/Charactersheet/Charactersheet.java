@@ -30,7 +30,6 @@ public class Charactersheet {
 //    private Spellcasting spellcasting;
 //    private Equipment equipment;    --> Reicht als String (Bucket oder So?)
 //    private FeaturesANDTraits featuresANDTraits;
-//    private LanguageProficiencies languageProficiencies;
 //    private ToolProficiencies toolProficiencies;
 //    private WeaponProficiencies weaponProficiencies;
 //
@@ -229,5 +228,18 @@ public class Charactersheet {
 
     public void setArmorProficiencies(ArmorProficiencies armorProficiencies) {
         this.armorProficiencies = armorProficiencies;
+    }
+
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private LanguageProficiencies languageProficiencies;
+
+    public LanguageProficiencies getLanguageProficiencies() {
+        return languageProficiencies;
+    }
+
+    public void setLanguageProficiencies(LanguageProficiencies languageProficiencies) {
+        this.languageProficiencies = languageProficiencies;
     }
 }

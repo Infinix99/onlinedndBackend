@@ -23,6 +23,7 @@ public class CharactersheetViewModel {
     private Treasure treasure;
     private CharacterDescription characterDescription;
     private ArmorProficiencies armorProficiencies;
+    private LanguageProficiencies languageProficiencies;
 
     public CharactersheetViewModel() {
     }
@@ -167,5 +168,13 @@ public class CharactersheetViewModel {
 
     public void setArmorProficiencies(ArmorProficiencies armorProficiencies) {
         this.armorProficiencies = armorProficiencies;
+    }
+
+    public LanguageProficiencies getLanguageProficiencies() {
+        return languageProficiencies;
+    }
+
+    public void setLanguageProficiencies(LanguageProficiencies languageProficiencies) {
+        this.languageProficiencies = languageProficiencies;
     }
 }
