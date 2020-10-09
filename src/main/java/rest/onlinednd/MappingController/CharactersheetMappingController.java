@@ -3,9 +3,6 @@ package rest.onlinednd.MappingController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import rest.onlinednd.Alexa.model.AlexaRO;
-import rest.onlinednd.Alexa.model.OutputSpeechRO;
-import rest.onlinednd.Alexa.model.ResponseRO;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 import rest.onlinednd.Entities.Charactersheet.Skills;
 import rest.onlinednd.Entities.Charactersheet.Stats;
@@ -53,7 +50,6 @@ public class CharactersheetMappingController {
             charactersheet.setGroupID(charactersheetViewModel.getGroupID());
             charactersheet.setStats(charactersheetViewModel.getStats());
             charactersheet.setSkills(charactersheetViewModel.getSkills());
-            //HitPoints
 //
 //            switch (charactersheetViewModel.race) {
 //                case 0:
@@ -90,12 +86,21 @@ public class CharactersheetMappingController {
         return returnString;
     }
 
-
-
-
+/*
     //PUT Methoden__________________________________________________
 
-/*
+    //PUT ON DIFFRENT ENDPOINTS
+
+    @PutMapping(
+            path = "/{charid}/stats",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    public void putStats(@PathVariable int charid, @RequestBody int strength) {
+
+
+    }
+
+
     @PutMapping(
             path = "/{charid}/skills",
             consumes = {MediaType.APPLICATION_JSON_VALUE}
