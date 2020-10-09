@@ -25,6 +25,7 @@ public class CharactersheetViewModel {
     private ArmorProficiencies armorProficiencies;
     private LanguageProficiencies languageProficiencies;
     private ToolProficiencies toolProficiencies;
+    private WeaponProficiencies weaponProficiencies;
 
     public CharactersheetViewModel() {
     }
@@ -185,5 +186,13 @@ public class CharactersheetViewModel {
 
     public void setToolProficiencies(ToolProficiencies toolProficiencies) {
         this.toolProficiencies = toolProficiencies;
+    }
+
+    public WeaponProficiencies getWeaponProficiencies() {
+        return weaponProficiencies;
+    }
+
+    public void setWeaponProficiencies(WeaponProficiencies weaponProficiencies) {
+        this.weaponProficiencies = weaponProficiencies;
     }
 }

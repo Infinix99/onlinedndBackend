@@ -20,24 +20,14 @@ public class Charactersheet {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer charactersheetID;
 
-
     //    private SavingThrows savingThrows;
 //    private Spellcasting spellcasting;
 //    private Equipment equipment;    --> Reicht als String (Bucket oder So?)
 //    private FeaturesANDTraits featuresANDTraits;
-//    private ToolProficiencies toolProficiencies;
-//    private WeaponProficiencies weaponProficiencies;
 //
     public Charactersheet() {
-//        languageProficiencies = new LanguageProficiencies();
-//        toolProficiencies = new ToolProficiencies();
 //        savingThrows = new SavingThrows();
-//        armorProficiencies = new ArmorProficiencies();
-//        weaponProficiencies = new WeaponProficiencies();
-//        characterDescription = new CharacterDesc();
 //        equipment = new Equipment();
-//        toolProficiencies = new ToolProficiencies();
-//        treasure = new Treasure();
     }
 
     //Getter and Setter______________________
@@ -245,4 +235,21 @@ public class Charactersheet {
     public void setToolProficiencies(ToolProficiencies toolProficiencies) {
         this.toolProficiencies = toolProficiencies;
     }
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private WeaponProficiencies weaponProficiencies;
+
+    public WeaponProficiencies getWeaponProficiencies() {
+        return weaponProficiencies;
+    }
+
+    public void setWeaponProficiencies(WeaponProficiencies weaponProficiencies) {
+        this.weaponProficiencies = weaponProficiencies;
+    }
+
+
+
+
+
 }
