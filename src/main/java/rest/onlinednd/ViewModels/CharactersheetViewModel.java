@@ -1,6 +1,7 @@
 package rest.onlinednd.ViewModels;
 
 
+import rest.onlinednd.Entities.Charactersheet.Life;
 import rest.onlinednd.Entities.Charactersheet.Skills;
 import rest.onlinednd.Entities.Charactersheet.Stats;
 
@@ -17,6 +18,7 @@ public class CharactersheetViewModel {
 
     private Stats stats;
     private Skills skills;
+    private Life life;
 
     public CharactersheetViewModel() {
     }
@@ -112,5 +114,13 @@ public class CharactersheetViewModel {
 
     public void setSkills(Skills skills) {
         this.skills = skills;
+    }
+
+    public Life getLife() {
+        return life;
+    }
+
+    public void setLife(Life life) {
+        this.life = life;
     }
 }
