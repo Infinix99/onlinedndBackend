@@ -189,6 +189,18 @@ public class Charactersheet {
 
 
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private CharacterDescription characterDescription;
+
+    public CharacterDescription getCharacterDescription() {
+        return characterDescription;
+    }
+
+    public void setCharacterDescription(CharacterDescription characterDescription) {
+        this.characterDescription = characterDescription;
+    }
+
 
 
 }

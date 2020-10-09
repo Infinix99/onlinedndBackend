@@ -52,6 +52,7 @@ public class CharactersheetMappingController {
             charactersheet.setSkills(charactersheetViewModel.getSkills());
             charactersheet.setLife(charactersheetViewModel.getLife());
             charactersheet.setTreasure(charactersheetViewModel.getTreasure());
+            charactersheet.setCharacterDescription(charactersheetViewModel.getCharacterDescription());
 //
 //            switch (charactersheetViewModel.race) {
 //                case 0:

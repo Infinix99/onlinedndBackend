@@ -1,10 +1,7 @@
 package rest.onlinednd.ViewModels;
 
 
-import rest.onlinednd.Entities.Charactersheet.Life;
-import rest.onlinednd.Entities.Charactersheet.Skills;
-import rest.onlinednd.Entities.Charactersheet.Stats;
-import rest.onlinednd.Entities.Charactersheet.Treasure;
+import rest.onlinednd.Entities.Charactersheet.*;
 
 public class CharactersheetViewModel {
     private String characterName;
@@ -21,6 +18,7 @@ public class CharactersheetViewModel {
     private Skills skills;
     private Life life;
     private Treasure treasure;
+    private CharacterDescription characterDescription;
 
     public CharactersheetViewModel() {
     }
@@ -132,5 +130,13 @@ public class CharactersheetViewModel {
 
     public void setTreasure(Treasure treasure) {
         this.treasure = treasure;
+    }
+
+    public CharacterDescription getCharacterDescription() {
+        return characterDescription;
+    }
+
+    public void setCharacterDescription(CharacterDescription characterDescription) {
+        this.characterDescription = characterDescription;
     }
 }
