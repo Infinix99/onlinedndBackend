@@ -42,10 +42,13 @@ public class AlexaMappingController {
             prepareResponse(alexaRO, outText, false);
 
         }
-        //GET CURRENT HP__________________________________________________________________________________________________________
-        else if
-             (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("GetCurrentHealth"))) {
+        else {
+                if (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest")) {
+
+                    switch (alexaRO.getRequest().getIntent().getName()) {
+
+//GET CURRENT HP__________________________________________________________________________________________________________
+                        case "GetCurrentHealth" :
                 try {
                     String charname = ((HashMap<String ,String>)(alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("CharacterName"))).get("value");  //Erklärung notwendig lma-fucking-o
                     Charactersheet charsheet = charactersheetRepository.findCharacterByName(charname);
@@ -56,19 +59,16 @@ public class AlexaMappingController {
                     outText = "Unser REST-Server hat leider aktuell Probleme. Bitte Versuch es später noch einmal ";
                     }
             prepareResponse(alexaRO, outText, true);
+            break;
 
-        }
 
 
-        //Recover CurrentHealth__________________________________________________________________________________________________________
-         else if
-            (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                    (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("RecoverCurrentHealthPoints"))) {
+//Recover CurrentHealth__________________________________________________________________________________________________________
+                        case "RecoverCurrentHealthPoints" :
+
                 try {
                     String charname = ((HashMap<String ,String>)(alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("CharacterName"))).get("value");
                     int regain = ((HashMap<Integer ,Integer>)(alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("regain"))).get("value");
-
-
                     Charactersheet charsheet = charactersheetRepository.findCharacterByName(charname);
 
                         if(charsheet.getLife().getCurrentHitPoints() + regain > charsheet.getLife().getMaximumHitPoints())
@@ -85,20 +85,18 @@ public class AlexaMappingController {
                     outText = "Unser REST-Server hat leider aktuell Probleme. Bitte Versuch es später noch einmal ";
                 }
                 prepareResponse(alexaRO, outText, true);
-
-            }
-
+                break;
 
 
 
-        //Remove CurrentHealth__________________________________________________________________________________________________________
-        else if
-        (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                        (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("RemoveCurrentHealthPoints"))) {
+
+
+//Remove CurrentHealth__________________________________________________________________________________________________________
+                        case "RemoveCurrentHealthPoints" :
+
             try {
                 String charname = ((HashMap<String ,String>)(alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("CharacterName"))).get("value");
                 int damage = ((HashMap<Integer ,Integer>)(alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("damage"))).get("value");
-
                 Charactersheet charsheet = charactersheetRepository.findCharacterByName(charname);
 
                     if(charsheet.getLife().getCurrentHitPoints() - damage < 0)
@@ -108,7 +106,7 @@ public class AlexaMappingController {
                         charsheet.getLife().setCurrentHitPoints(charsheet.getLife().getCurrentHitPoints() - damage);
                     }
 
-                outText = (String) charname + " current Health Points are now set at " + charsheet.getLife().getCurrentHitPoints();
+                    outText = (String) charname + " current Health Points are now set at " + charsheet.getLife().getCurrentHitPoints();
 
 
 
@@ -117,18 +115,16 @@ public class AlexaMappingController {
             }
             prepareResponse(alexaRO, outText, true);
 
-        }
 
 
 
-        //Set CurrentHealth__________________________________________________________________________________________________________
-        else if
-        (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                        (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("SetCurrentHealthPoints"))) {
+
+//Set CurrentHealth__________________________________________________________________________________________________________
+                    case "SetCurrentHealthPoints" :
+
             try {
                 String charname = ((HashMap<String ,String>)(alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("CharacterName"))).get("value");
                 int healthpoints = ((HashMap<Integer ,Integer>)(alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("hitpoints"))).get("value");
-
                 Charactersheet charsheet = charactersheetRepository.findCharacterByName((String) charname);
 
 
@@ -150,16 +146,14 @@ public class AlexaMappingController {
             }
             prepareResponse(alexaRO, outText, true);
 
-        }
 
-        //Kill Player__________________________________________________________________________________________________________
-        else if
-        (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                        (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("KillPlayer"))) {
+
+//Kill Player__________________________________________________________________________________________________________
+                    case "KillPlayer" :
+
             try {
                 String charname = ((HashMap<String ,String>)(alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("CharacterName"))).get("value");
-
-                Charactersheet charsheet = charactersheetRepository.findCharacterByName((String) charname);
+                 Charactersheet charsheet = charactersheetRepository.findCharacterByName((String) charname);
 
                 charsheet.getLife().setCurrentHitPoints(0);
                 outText = charname + " is now at 0 HP..... " + charname + " may be dead!";
@@ -171,17 +165,15 @@ public class AlexaMappingController {
             }
             prepareResponse(alexaRO, outText, true);
 
-        }
 
 
-        //Max Player__________________________________________________________________________________________________________
-        else if
-        (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                        (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("MaxHealth"))) {
-            try {
+
+//Max Player__________________________________________________________________________________________________________
+                    case "MaxHealth" :
+
+           try {
                 String charname = ((HashMap<String ,String>)(alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("CharacterName"))).get("value");
-
-                Charactersheet charsheet = charactersheetRepository.findCharacterByName((String) charname);
+                 Charactersheet charsheet = charactersheetRepository.findCharacterByName((String) charname);
 
                 charsheet.getLife().setCurrentHitPoints(charsheet.getLife().getMaximumHitPoints());
                 outText = charname + " is now at FULL HP! -> " + charsheet.getLife().getCurrentHitPoints();
@@ -193,7 +185,7 @@ public class AlexaMappingController {
             }
             prepareResponse(alexaRO, outText, true);
 
-        }
+        } } }
 
         return alexaRO;
 
