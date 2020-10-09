@@ -60,6 +60,7 @@ public class CharactersheetMappingController {
             charactersheet.setToolProficiencies(charactersheetViewModel.getToolProficiencies());
             charactersheet.setWeaponProficiencies(charactersheetViewModel.getWeaponProficiencies());
             charactersheet.setSavingThrows(charactersheetViewModel.getSavingThrows());
+            charactersheet.setNotes(charactersheetViewModel.getNotes());
 
 //
 //            switch (charactersheetViewModel.race) {

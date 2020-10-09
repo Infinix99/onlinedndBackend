@@ -3,6 +3,8 @@ package rest.onlinednd.ViewModels;
 
 import rest.onlinednd.Entities.Charactersheet.*;
 
+import java.util.Set;
+
 public class CharactersheetViewModel {
     private String characterName;
     private int initiative;
@@ -27,6 +29,7 @@ public class CharactersheetViewModel {
     private ToolProficiencies toolProficiencies;
     private WeaponProficiencies weaponProficiencies;
     private SavingThrows savingThrows;
+    private Set<Notes> notes;
 
     public CharactersheetViewModel() {
     }
@@ -203,5 +206,13 @@ public class CharactersheetViewModel {
 
     public void setSavingThrows(SavingThrows savingThrows) {
         this.savingThrows = savingThrows;
+    }
+
+    public Set<Notes> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Set<Notes> notes) {
+        this.notes = notes;
     }
 }

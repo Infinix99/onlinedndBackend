@@ -1,6 +1,9 @@
 package rest.onlinednd.Entities.Charactersheet;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table
@@ -20,13 +23,12 @@ public class Charactersheet {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer charactersheetID;
 
-    //    private SavingThrows savingThrows;
+
 //    private Spellcasting spellcasting;
 //    private Equipment equipment;    --> Reicht als String (Bucket oder So?)
 //    private FeaturesANDTraits featuresANDTraits;
 //
     public Charactersheet() {
-//        savingThrows = new SavingThrows();
 //        equipment = new Equipment();
     }
 
@@ -269,5 +271,21 @@ public class Charactersheet {
 
     public void setSavingThrows(SavingThrows savingThrows) {
         this.savingThrows = savingThrows;
+    }
+
+
+
+
+
+    @OneToMany(mappedBy = "charactersheet")
+    @JsonManagedReference
+    private Set<Notes> notes;
+
+    public Set<Notes> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Set<Notes> notes) {
+        this.notes = notes;
     }
 }
