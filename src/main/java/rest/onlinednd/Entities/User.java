@@ -1,11 +1,10 @@
 package rest.onlinednd.Entities;
 
-import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
-
 import javax.persistence.*;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer UserID;
@@ -14,11 +13,18 @@ public class User {
 
     private String email;
 
-    /*
+
     @ManyToOne
-    @JoinColumn//(name = "charBucketID")
+    @JoinColumn(name = "char_bucketid")
     private CharctersheetBucket charactersheetBucket;
-*/
+
+
+
+
+
+
+
+    //---------------Getter Setter---------------------------------------------------
 
     public Integer getId() {
         return UserID;
