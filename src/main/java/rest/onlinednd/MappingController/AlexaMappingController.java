@@ -28,6 +28,7 @@ public class AlexaMappingController {
 */
 
     //ALEXA GET___________________________________________
+    /*
     @PostMapping
     public AlexaRO getGames(@RequestBody AlexaRO alexaRO, @PathVariable int id, @PathVariable int groupid) {
         //String Charactername = CharacterName.toString();
@@ -47,6 +48,7 @@ public class AlexaMappingController {
                     Object charname = alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("CharacterName");
                     Charactersheet charsheet = charactersheetRepository.findCharacterByName((String)charname);
 
+
                     //CharacterSheet in der Gruppe nach Charactername filtern/suchen //QUERY (?)
                     //outText = outText + "du hast aktuell " + //QueryFür "CurrentHitPoints" UNTER Life -> Hitpoints -> *Attribute* int currentHitPoints//  + "Hit Points";
 
@@ -57,12 +59,30 @@ public class AlexaMappingController {
             prepareResponse(alexaRO, outText, true);
 
         }}
-        //GET **************__________________________________________________________________________________________________________
-        /*else { // Weitere GETS
+        //Update CurrentHealth__________________________________________________________________________________________________________
+        else if
+             (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
+                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("UpdateCurrentHealthPoints"))) {
+                try {
+                    Object charname = alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("CharacterName");
+                    Charactersheet charsheet = charactersheetRepository.findCharacterByName((String)charname);
+
+
+
+                    //CharacterSheet in der Gruppe nach Charactername filtern/suchen //QUERY (?)
+                    //outText = outText + "du hast aktuell " + //QueryFür "CurrentHitPoints" UNTER Life -> Hitpoints -> *Attribute* int currentHitPoints//  + "Hit Points";
+
+
+                    } catch (Exception e) {
+                    outText = "Unser REST-Server hat leider aktuell Probleme. Bitte Versuch es später noch einmal ";
+                    }
+            prepareResponse(alexaRO, outText, true);
 
         }
 
-         */
+
+
+
         return alexaRO;
 
 
@@ -79,6 +99,8 @@ public class AlexaMappingController {
         alexaRO.setResponse(response);
         return alexaRO;
     }
+
+     */
 }
 
 
