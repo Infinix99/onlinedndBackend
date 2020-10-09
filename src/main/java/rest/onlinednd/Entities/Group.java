@@ -1,4 +1,4 @@
 package rest.onlinednd.Entities;
 
-public class Group {
+public class Group{
 }

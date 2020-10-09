@@ -48,11 +48,15 @@ public class CharactersheetMappingController {
             charactersheet.setSpeed(charactersheetViewModel.getSpeed());
             charactersheet.setSheetIsVisible(charactersheetViewModel.isSheetIsVisible());
             charactersheet.setGroupID(charactersheetViewModel.getGroupID());
+            charactersheet.setRace(charactersheetViewModel.getRace());
+            charactersheet.setCombatClass(charactersheetViewModel.getCombatClass());
             charactersheet.setStats(charactersheetViewModel.getStats());
             charactersheet.setSkills(charactersheetViewModel.getSkills());
             charactersheet.setLife(charactersheetViewModel.getLife());
             charactersheet.setTreasure(charactersheetViewModel.getTreasure());
             charactersheet.setCharacterDescription(charactersheetViewModel.getCharacterDescription());
+            charactersheet.setArmorProficiencies(charactersheetViewModel.getArmorProficiencies());
+
 //
 //            switch (charactersheetViewModel.race) {
 //                case 0:

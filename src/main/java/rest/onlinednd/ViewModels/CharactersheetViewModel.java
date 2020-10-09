@@ -14,11 +14,15 @@ public class CharactersheetViewModel {
     private boolean sheetIsVisible;
     private int groupID;
 
+    private String combatClass;
+    private String race;
+
     private Stats stats;
     private Skills skills;
     private Life life;
     private Treasure treasure;
     private CharacterDescription characterDescription;
+    private ArmorProficiencies armorProficiencies;
 
     public CharactersheetViewModel() {
     }
@@ -27,6 +31,23 @@ public class CharactersheetViewModel {
 
 
     //_________________GETTER & SETTER_________________\\
+
+
+    public String getCombatClass() {
+        return combatClass;
+    }
+
+    public void setCombatClass(String combatClass) {
+        this.combatClass = combatClass;
+    }
+
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
 
     public String getCharacterName() {
         return characterName;
@@ -138,5 +159,13 @@ public class CharactersheetViewModel {
 
     public void setCharacterDescription(CharacterDescription characterDescription) {
         this.characterDescription = characterDescription;
+    }
+
+    public ArmorProficiencies getArmorProficiencies() {
+        return armorProficiencies;
+    }
+
+    public void setArmorProficiencies(ArmorProficiencies armorProficiencies) {
+        this.armorProficiencies = armorProficiencies;
     }
 }

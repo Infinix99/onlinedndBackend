@@ -28,13 +28,8 @@ public class Charactersheet {
 
 //    private SavingThrows savingThrows;
 //    private Spellcasting spellcasting;
-//    private Equipment equipment;    --> Reicht als String
-//    private Treasure treasure;
+//    private Equipment equipment;    --> Reicht als String (Bucket oder So?)
 //    private FeaturesANDTraits featuresANDTraits;
-//    private Class aClass;    --> Reicht als String
-//    private Race race;        --> Reicht als String
-//    private CharacterDesc characterDescription;
-//    private ArmorProficiencies armorProficiencies;
 //    private LanguageProficiencies languageProficiencies;
 //    private ToolProficiencies toolProficiencies;
 //    private WeaponProficiencies weaponProficiencies;
@@ -50,7 +45,6 @@ public class Charactersheet {
 //        toolProficiencies = new ToolProficiencies();
 //        treasure = new Treasure();
    }
-
 
     //Getter and Setter______________________
 
@@ -131,6 +125,28 @@ public class Charactersheet {
         this.groupID = groupID;
     }
 
+
+    //______KOMPLEX FRONT END OPPERTATIONS______\\
+
+    private String race;
+    private String combatClass;
+
+    public String getRace() {
+        return race;
+    }
+
+    public void setRace(String race) {
+        this.race = race;
+    }
+
+    public String getCombatClass() {
+        return combatClass;
+    }
+
+    public void setCombatClass(String combatClass) {
+        this.combatClass = combatClass;
+    }
+
     //________________FORGEIN KEY's___________________\\
 
     @OneToOne(cascade = {CascadeType.ALL})
@@ -203,4 +219,15 @@ public class Charactersheet {
 
 
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private ArmorProficiencies armorProficiencies;
+
+    public ArmorProficiencies getArmorProficiencies() {
+        return armorProficiencies;
+    }
+
+    public void setArmorProficiencies(ArmorProficiencies armorProficiencies) {
+        this.armorProficiencies = armorProficiencies;
+    }
 }
