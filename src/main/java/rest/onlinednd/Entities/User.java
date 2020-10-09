@@ -13,10 +13,12 @@ public class User {
 
     private String email;
 
-
-    @ManyToOne
-    @JoinColumn(name = "char_bucketid")
+/*
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn//(name = "char_bucketid")
     private CharctersheetBucket charactersheetBucket;
+*/
+
 
 
 

@@ -2,17 +2,21 @@ package rest.onlinednd.Entities;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name="group_table")
 public class Group {
-    private String groupid;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer charBucketID;
+    private Integer groupID;
 
+    public Group() {
+    }
 
+    public Integer getGroupID() {
+        return groupID;
+    }
 
-
-
-
+    public void setGroupID(Integer groupID) {
+        this.groupID = groupID;
+    }
 }
