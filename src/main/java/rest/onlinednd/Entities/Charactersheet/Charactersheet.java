@@ -146,6 +146,7 @@ public class Charactersheet {
     }
 
 
+
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn
     private Skills skills;
@@ -157,6 +158,7 @@ public class Charactersheet {
     public void setSkills(Skills skills) {
         this.skills = skills;
     }
+
 
 
     @OneToOne(cascade = {CascadeType.ALL})
@@ -172,6 +174,7 @@ public class Charactersheet {
     }
 
 
+
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn
     private Treasure treasure;
@@ -183,6 +186,7 @@ public class Charactersheet {
     public void setTreasure(Treasure treasure) {
         this.treasure = treasure;
     }
+
 
 
     @OneToOne(cascade = {CascadeType.ALL})
@@ -198,6 +202,7 @@ public class Charactersheet {
     }
 
 
+
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn
     private ArmorProficiencies armorProficiencies;
@@ -209,6 +214,7 @@ public class Charactersheet {
     public void setArmorProficiencies(ArmorProficiencies armorProficiencies) {
         this.armorProficiencies = armorProficiencies;
     }
+
 
 
     @OneToOne(cascade = {CascadeType.ALL})
@@ -224,6 +230,7 @@ public class Charactersheet {
     }
 
 
+
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn
     private ToolProficiencies toolProficiencies;
@@ -235,6 +242,8 @@ public class Charactersheet {
     public void setToolProficiencies(ToolProficiencies toolProficiencies) {
         this.toolProficiencies = toolProficiencies;
     }
+
+
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn
@@ -250,6 +259,15 @@ public class Charactersheet {
 
 
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private SavingThrows savingThrows;
 
+    public SavingThrows getSavingThrows() {
+        return savingThrows;
+    }
 
+    public void setSavingThrows(SavingThrows savingThrows) {
+        this.savingThrows = savingThrows;
+    }
 }

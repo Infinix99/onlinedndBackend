@@ -59,6 +59,7 @@ public class CharactersheetMappingController {
             charactersheet.setLanguageProficiencies(charactersheetViewModel.getLanguageProficiencies());
             charactersheet.setToolProficiencies(charactersheetViewModel.getToolProficiencies());
             charactersheet.setWeaponProficiencies(charactersheetViewModel.getWeaponProficiencies());
+            charactersheet.setSavingThrows(charactersheetViewModel.getSavingThrows());
 
 //
 //            switch (charactersheetViewModel.race) {

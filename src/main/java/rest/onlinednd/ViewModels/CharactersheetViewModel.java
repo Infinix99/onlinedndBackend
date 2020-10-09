@@ -26,6 +26,7 @@ public class CharactersheetViewModel {
     private LanguageProficiencies languageProficiencies;
     private ToolProficiencies toolProficiencies;
     private WeaponProficiencies weaponProficiencies;
+    private SavingThrows savingThrows;
 
     public CharactersheetViewModel() {
     }
@@ -194,5 +195,13 @@ public class CharactersheetViewModel {
 
     public void setWeaponProficiencies(WeaponProficiencies weaponProficiencies) {
         this.weaponProficiencies = weaponProficiencies;
+    }
+
+    public SavingThrows getSavingThrows() {
+        return savingThrows;
+    }
+
+    public void setSavingThrows(SavingThrows savingThrows) {
+        this.savingThrows = savingThrows;
     }
 }
