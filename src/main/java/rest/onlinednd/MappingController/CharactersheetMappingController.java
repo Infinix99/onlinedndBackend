@@ -50,6 +50,7 @@ public class CharactersheetMappingController {
             charactersheet.setGroupID(charactersheetViewModel.getGroupID());
             charactersheet.setStats(charactersheetViewModel.getStats());
             charactersheet.setSkills(charactersheetViewModel.getSkills());
+            charactersheet.setLife(charactersheetViewModel.getLife());
 //
 //            switch (charactersheetViewModel.race) {
 //                case 0:

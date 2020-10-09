@@ -25,7 +25,7 @@ public class Charactersheet {
 
 
 
-//    private Skills skills;
+
 //    private SavingThrows savingThrows;
 //    private Spellcasting spellcasting;
 //    private Equipment equipment;    --> Reicht als String
@@ -38,20 +38,13 @@ public class Charactersheet {
 //    private LanguageProficiencies languageProficiencies;
 //    private ToolProficiencies toolProficiencies;
 //    private WeaponProficiencies weaponProficiencies;
-//    private HitPoints hitPoints;
-//    private HitDice hitDice;
 //
    public Charactersheet() {
-//        stats = new Stats();
-//        proficiencyBonus = 2;
-//        skills = new Skills();
 //        languageProficiencies = new LanguageProficiencies();
 //        toolProficiencies = new ToolProficiencies();
 //        savingThrows = new SavingThrows();
 //        armorProficiencies = new ArmorProficiencies();
 //        weaponProficiencies = new WeaponProficiencies();
-//        hitPoints = new HitPoints();
-//        hitDice = new HitDice();
 //        characterDescription = new CharacterDesc();
 //        equipment = new Equipment();
 //        toolProficiencies = new ToolProficiencies();
@@ -140,8 +133,6 @@ public class Charactersheet {
 
     //________________FORGEIN KEY's___________________\\
 
-    //@OneToOne(targetEntity = Stats.class )
-    //@JoinColumn(name = "stats_statsid")
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn
     private Stats stats;
@@ -153,6 +144,8 @@ public class Charactersheet {
     public void setStats(Stats stats) {
         this.stats = stats;
     }
+
+
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn
@@ -168,4 +161,15 @@ public class Charactersheet {
 
 
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private Life life;
+
+    public Life getLife() {
+        return life;
+    }
+
+    public void setLife(Life life) {
+        this.life = life;
+    }
 }
