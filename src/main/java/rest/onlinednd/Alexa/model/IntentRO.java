@@ -14,11 +14,18 @@ public class IntentRO
     @JsonProperty("name")
     private String name;
     
-    // @JsonProperty("slots")
-    // private SlotsRO slots;
-    // So müsste es weitergehen, wenn der Intent Slots hat
-    //
-    
+    @JsonProperty("slots")
+    private SlotsRO slots;
+
+    @JsonProperty("slots")
+    public SlotsRO getSlots() {
+        return slots;
+    }
+    @JsonProperty("slots")
+    public void setSlots(SlotsRO slots) {
+        this.slots = slots;
+    }
+
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
 

@@ -91,48 +91,6 @@ public class CharactersheetMappingController {
     }
 
 
-    //ALEXA-GETTERS_________________________________________________
-
-    @PostMapping("/{charid}")
-    public AlexaRO getGames(@RequestBody AlexaRO alexaRO, @PathVariable int id, @PathVariable int groupid, @PathVariable int charid) {
-
-        String outText = "";
-
-                        /*if (alexaRO.getRequest().getType().equalsIgnoreCase("LaunchRequest"))
-                            {
-                            outText = outText + " ";
-                                prepareResponse(alexaRO, outText, false);
-                            }
-                            else {
-
-                         */
-        if (alexaRO.getRequest().getType().equalsIgnoreCase("IntentRequest") &&
-                (alexaRO.getRequest().getIntent().getName().equalsIgnoreCase("GetCurrentHitPoints"))) {
-            try {
-                //outText = outText + "du hast aktuell " + //QueryFür "CurrentHitPoints" UNTER Life -> Hitpoints -> *Attribute* int currentHitPoints//  + "Hit Points";
-            } catch (Exception e) {
-                outText = "Unser REST-Server hat leider aktuell Probleme. Bitte Versuch es später noch einmal ";
-            }
-            prepareResponse(alexaRO, outText, true);
-
-        }
-        else { // Weitere GETS
-
-        }
-        return alexaRO;
-    }
-    private AlexaRO prepareResponse(AlexaRO alexaRO, String outText, boolean shouldEndSession) {
-
-        alexaRO.setRequest(null);
-        alexaRO.setSession(null);
-        alexaRO.setContext(null);
-        OutputSpeechRO outputSpeechRO = new OutputSpeechRO();
-        outputSpeechRO.setType("PlainText");
-        outputSpeechRO.setText(outText);
-        ResponseRO response = new ResponseRO(outputSpeechRO, shouldEndSession);
-        alexaRO.setResponse(response);
-        return alexaRO;
-    }
 
 
     //PUT Methoden__________________________________________________
