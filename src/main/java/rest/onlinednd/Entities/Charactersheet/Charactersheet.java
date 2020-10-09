@@ -172,4 +172,23 @@ public class Charactersheet {
     public void setLife(Life life) {
         this.life = life;
     }
+
+
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private Treasure treasure;
+
+    public Treasure getTreasure() {
+        return treasure;
+    }
+
+    public void setTreasure(Treasure treasure) {
+        this.treasure = treasure;
+    }
+
+
+
+
+
 }

@@ -18,6 +18,9 @@ public class Life {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer lifeID;
 
+    public Life() {
+    }
+
     //_______GETTER & SETTER_______\\
 
     public int getCurrentHitPoints() {

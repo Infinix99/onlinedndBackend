@@ -7,7 +7,6 @@ public class CharctersheetBucket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column//(name = "charBucketID")
     private Integer charBucketID;
 
 
