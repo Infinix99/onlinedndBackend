@@ -24,6 +24,7 @@ public class CharactersheetViewModel {
     private CharacterDescription characterDescription;
     private ArmorProficiencies armorProficiencies;
     private LanguageProficiencies languageProficiencies;
+    private ToolProficiencies toolProficiencies;
 
     public CharactersheetViewModel() {
     }
@@ -176,5 +177,13 @@ public class CharactersheetViewModel {
 
     public void setLanguageProficiencies(LanguageProficiencies languageProficiencies) {
         this.languageProficiencies = languageProficiencies;
+    }
+
+    public ToolProficiencies getToolProficiencies() {
+        return toolProficiencies;
+    }
+
+    public void setToolProficiencies(ToolProficiencies toolProficiencies) {
+        this.toolProficiencies = toolProficiencies;
     }
 }

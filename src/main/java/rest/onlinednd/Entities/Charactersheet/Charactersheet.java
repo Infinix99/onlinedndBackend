@@ -21,19 +21,14 @@ public class Charactersheet {
     private Integer charactersheetID;
 
 
-
-
-
-
-
-//    private SavingThrows savingThrows;
+    //    private SavingThrows savingThrows;
 //    private Spellcasting spellcasting;
 //    private Equipment equipment;    --> Reicht als String (Bucket oder So?)
 //    private FeaturesANDTraits featuresANDTraits;
 //    private ToolProficiencies toolProficiencies;
 //    private WeaponProficiencies weaponProficiencies;
 //
-   public Charactersheet() {
+    public Charactersheet() {
 //        languageProficiencies = new LanguageProficiencies();
 //        toolProficiencies = new ToolProficiencies();
 //        savingThrows = new SavingThrows();
@@ -43,7 +38,7 @@ public class Charactersheet {
 //        equipment = new Equipment();
 //        toolProficiencies = new ToolProficiencies();
 //        treasure = new Treasure();
-   }
+    }
 
     //Getter and Setter______________________
 
@@ -161,7 +156,6 @@ public class Charactersheet {
     }
 
 
-
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn
     private Skills skills;
@@ -173,7 +167,6 @@ public class Charactersheet {
     public void setSkills(Skills skills) {
         this.skills = skills;
     }
-
 
 
     @OneToOne(cascade = {CascadeType.ALL})
@@ -189,7 +182,6 @@ public class Charactersheet {
     }
 
 
-
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn
     private Treasure treasure;
@@ -203,7 +195,6 @@ public class Charactersheet {
     }
 
 
-
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn
     private CharacterDescription characterDescription;
@@ -215,7 +206,6 @@ public class Charactersheet {
     public void setCharacterDescription(CharacterDescription characterDescription) {
         this.characterDescription = characterDescription;
     }
-
 
 
     @OneToOne(cascade = {CascadeType.ALL})
@@ -241,5 +231,18 @@ public class Charactersheet {
 
     public void setLanguageProficiencies(LanguageProficiencies languageProficiencies) {
         this.languageProficiencies = languageProficiencies;
+    }
+
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private ToolProficiencies toolProficiencies;
+
+    public ToolProficiencies getToolProficiencies() {
+        return toolProficiencies;
+    }
+
+    public void setToolProficiencies(ToolProficiencies toolProficiencies) {
+        this.toolProficiencies = toolProficiencies;
     }
 }
