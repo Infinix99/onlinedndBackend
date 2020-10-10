@@ -4,11 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
+import rest.onlinednd.Entities.Charactersheet.Equippable;
 import rest.onlinednd.Entities.Charactersheet.Notes;
+import rest.onlinednd.Entities.Charactersheet.Wearable;
 import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
+import rest.onlinednd.Repositories.Charactersheet.EquippableRepository;
 import rest.onlinednd.Repositories.Charactersheet.NotesRepository;
+import rest.onlinednd.Repositories.Charactersheet.WearableRepository;
 import rest.onlinednd.ViewModels.CharactersheetViewModel;
+import rest.onlinednd.ViewModels.EquippableViewModel;
 import rest.onlinednd.ViewModels.NotesViewModel;
+import rest.onlinednd.ViewModels.WearableViewModel;
 
 import java.util.Optional;
 import java.util.Set;
@@ -22,13 +28,17 @@ public class CharactersheetMappingController {
     CharactersheetRepository charactersheetRepository;
     @Autowired
     NotesRepository notesRepository;
+    @Autowired
+    EquippableRepository equippableRepository;
+    @Autowired
+    WearableRepository wearableRepository;
 
 
     //Charactersheet Methoden______________________________________________
 
     @GetMapping("/{characterid}")
     public @ResponseBody Charactersheet
-    getCharactersheet(@PathVariable int id, @PathVariable int groupid, @PathVariable int characterid) {
+    getCharactersheet(@PathVariable int userid, @PathVariable int groupid, @PathVariable int characterid) {
         if(characterid != 0)
             return charactersheetRepository.findCharactersheetByID(characterid);
         else
@@ -63,7 +73,6 @@ public class CharactersheetMappingController {
             charactersheet.setToolProficiencies(charactersheetViewModel.getToolProficiencies());
             charactersheet.setWeaponProficiencies(charactersheetViewModel.getWeaponProficiencies());
             charactersheet.setSavingThrows(charactersheetViewModel.getSavingThrows());
-            charactersheet.setNotes(charactersheetViewModel.getNotes());
 
 
             charactersheetRepository.save(charactersheet);
@@ -273,5 +282,114 @@ public class CharactersheetMappingController {
         notesRepository.delete(notes);
         return "Note was deleted";
     }
+
+
+    //EQUIPPABLE______________________________________________________________________________________
+
+    @GetMapping("/{characterid}/equippable/all")
+    public @ResponseBody Set<Equippable>
+    getEquippablesfromCharactersheet(@PathVariable int userid, @PathVariable int groupid, @PathVariable int characterid){
+
+        return equippableRepository.findAllEquippablesFromSheet(characterid);
+    }
+
+    @PostMapping(
+            path = "/{characterid}/equippable"
+    )
+    public @ResponseBody String
+    postEquippable(@RequestBody EquippableViewModel equippableViewModel, @PathVariable int characterid){
+        String returnString;
+        if(equippableViewModel != null || characterid != 0) {
+            Equippable equippable = new Equippable();
+            equippable.setEquippable(equippableViewModel.getEquippable());
+            equippable.setCharactersheet(charactersheetRepository.findCharactersheetByID(characterid));
+            equippableRepository.save(equippable);
+            returnString = "Equippable was saved.";
+        }
+        else
+            returnString = "No equippable to save.";
+        return returnString;
+    }
+
+    @PutMapping(
+            path = "/{characterid}/equippable/{equippableid}"
+    )
+    public void
+    putEquippable(@RequestBody EquippableViewModel equippableViewModel, @PathVariable int characterid, @PathVariable int equippableid){
+        Equippable equippable = equippableRepository.findEquippableByIds(characterid, equippableid);
+        equippable.setEquippable(equippableViewModel.getEquippable());
+        equippableRepository.save(equippable);
+    }
+
+    @DeleteMapping(
+            path = "/{characterid}/equippable/{equippableid}/delete"
+    )
+    public @ResponseBody String
+    deleteEquippable(@PathVariable int characterid, @PathVariable int equippableid){
+        Equippable equippable = equippableRepository.findEquippableByIds(characterid, equippableid);
+        equippable.setCharactersheet(null);
+        equippableRepository.delete(equippable);
+        return "Equippable was deleted";
+    }
+
+
+
+
+
+    //WEARABLE_____________________________________________________________________________________________________________
+    @GetMapping("/{characterid}/wearable/all")
+    public @ResponseBody Set<Wearable>
+    getWearablesfromCharactersheet(@PathVariable int userid, @PathVariable int groupid, @PathVariable int characterid){
+
+        return wearableRepository.findAllWearableFromSheet(characterid);
+    }
+
+    @PostMapping(
+            path = "/{characterid}/wearable"
+    )
+    public @ResponseBody String
+    postWearable(@RequestBody WearableViewModel wearableViewModel, @PathVariable int characterid){
+        String returnString;
+        if(wearableViewModel != null || characterid != 0) {
+            Wearable wearable = new Wearable();
+            wearable.setWearable(wearableViewModel.getWearable());
+            wearable.setCharactersheet(charactersheetRepository.findCharactersheetByID(characterid));
+            wearableRepository.save(wearable);
+            returnString = "Wearable was saved.";
+        }
+        else
+            returnString = "No wearable to save.";
+        return returnString;
+    }
+
+    @PutMapping(
+            path = "/{characterid}/wearable/{wearableid}"
+    )
+    public void
+    putWearable(@RequestBody WearableViewModel wearableViewModel, @PathVariable int characterid, @PathVariable int wearableid){
+        Wearable wearable = wearableRepository.findWearableByIds(characterid, wearableid);
+        wearable.setWearable(wearableViewModel.getWearable());
+        wearableRepository.save(wearable);
+    }
+
+    @DeleteMapping(
+            path = "/{characterid}/wearable/{wearableid}/delete"
+    )
+    public @ResponseBody String
+    deleteWearable(@PathVariable int characterid, @PathVariable int wearableid){
+        Wearable wearable = wearableRepository.findWearableByIds(characterid, wearableid);
+        wearable.setCharactersheet(null);
+        wearableRepository.delete(wearable);
+        return "Wearable was deleted";
+    }
+
+
+
+
+
+    //Carryable_________________________________________________________________________________
+
+
+
 
 }

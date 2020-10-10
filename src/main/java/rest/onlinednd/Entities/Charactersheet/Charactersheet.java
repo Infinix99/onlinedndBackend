@@ -298,6 +298,29 @@ public class Charactersheet {
     @JsonManagedReference
     private Set<Equippable> equippables;
 
+    public Set<Equippable> getEquippables() {
+        return equippables;
+    }
+
+    public void setEquippables(Set<Equippable> equippables) {
+        this.equippables = equippables;
+    }
+
+
+
+    @OneToMany(mappedBy = "charactersheet")
+    @JsonManagedReference
+    private Set<Wearable> wearables;
+
+    public Set<Wearable> getWearables() {
+        return wearables;
+    }
+
+    public void setWearables(Set<Wearable> wearables) {
+        this.wearables = wearables;
+    }
+
+
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn
