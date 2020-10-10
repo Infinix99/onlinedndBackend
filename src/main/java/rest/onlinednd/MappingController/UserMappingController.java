@@ -2,9 +2,11 @@ package rest.onlinednd.MappingController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 import rest.onlinednd.Entities.User;
 import rest.onlinednd.Repositories.UserRepository;
 
+import javax.annotation.Resource;
 import java.util.Optional;
 
 @RestController
@@ -22,11 +24,25 @@ public class UserMappingController {
         return userRepository.findById(id);
     }
 
+/*
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAllUsers() {
-        // This returns a JSON or XML with the users
-        return userRepository.findAll();
+        // This returns a JSON or XML with the useCharactersheetsrRepository.findAll();
     }
+
+ */
+
+    @GetMapping("/{userid}/{characterid}")
+    public @ResponseBody
+    Charactersheet
+    getCharactersheet(@PathVariable int userid , @PathVariable int characterid ) {
+        if(characterid != 0)
+            return null;
+        else
+            return null;
+    }
+
+
 
     @PostMapping(
             path = "/register"
@@ -39,6 +55,8 @@ public class UserMappingController {
 
         return "Account " + user.getName() + " wurde angelegt";
     }
+
+
 
 //    @PostMapping(
 //            path = "/login",

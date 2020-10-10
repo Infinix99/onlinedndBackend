@@ -1,6 +1,11 @@
 package rest.onlinednd.Entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import rest.onlinednd.Entities.Charactersheet.Charactersheet;
+import rest.onlinednd.Entities.Charactersheet.Notes;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
@@ -13,20 +18,21 @@ public class User {
 
     private String email;
 
-/*
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn//(name = "char_bucketid")
-    private CharctersheetBucket charactersheetBucket;
-*/
-
-
-
-
-
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private Set<Charactersheet> charactersheets;
 
 
 
     //---------------Getter Setter---------------------------------------------------
+
+    public Set<Charactersheet> getCharactersheets() {
+        return charactersheets;
+    }
+
+    public void setCharactersheets(Set<Charactersheet> charactersheets) {
+        this.charactersheets = charactersheets;
+    }
 
     public Integer getId() {
         return UserID;

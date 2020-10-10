@@ -31,6 +31,7 @@ public class CharactersheetViewModel {
     private SavingThrows savingThrows;
     private Set<Notes> notes;
 
+
     public CharactersheetViewModel() {
     }
 

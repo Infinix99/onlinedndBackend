@@ -1,8 +1,12 @@
 package rest.onlinednd.Entities.Charactersheet;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.mapping.Collection;
+import rest.onlinednd.Entities.User;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,6 +22,7 @@ public class Charactersheet {
     private int level;
     private boolean sheetIsVisible;
     private int groupID;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -275,8 +280,6 @@ public class Charactersheet {
 
 
 
-
-
     @OneToMany(mappedBy = "charactersheet")
     @JsonManagedReference
     private Set<Notes> notes;
@@ -287,5 +290,25 @@ public class Charactersheet {
 
     public void setNotes(Set<Notes> notes) {
         this.notes = notes;
+    }
+
+
+
+    @OneToMany(mappedBy = "charactersheet")
+    @JsonManagedReference
+    private Set<Equippable> equippables;
+
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    @JsonBackReference
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
