@@ -3,18 +3,9 @@ package rest.onlinednd.MappingController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
-import rest.onlinednd.Entities.Charactersheet.Charactersheet;
-import rest.onlinednd.Entities.Charactersheet.Equippable;
-import rest.onlinednd.Entities.Charactersheet.Notes;
-import rest.onlinednd.Entities.Charactersheet.Wearable;
-import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
-import rest.onlinednd.Repositories.Charactersheet.EquippableRepository;
-import rest.onlinednd.Repositories.Charactersheet.NotesRepository;
-import rest.onlinednd.Repositories.Charactersheet.WearableRepository;
-import rest.onlinednd.ViewModels.CharactersheetViewModel;
-import rest.onlinednd.ViewModels.EquippableViewModel;
-import rest.onlinednd.ViewModels.NotesViewModel;
-import rest.onlinednd.ViewModels.WearableViewModel;
+import rest.onlinednd.Entities.Charactersheet.*;
+import rest.onlinednd.Repositories.Charactersheet.*;
+import rest.onlinednd.ViewModels.*;
 
 import java.util.Optional;
 import java.util.Set;
@@ -32,6 +23,8 @@ public class CharactersheetMappingController {
     EquippableRepository equippableRepository;
     @Autowired
     WearableRepository wearableRepository;
+    @Autowired
+    CarryableRepository carryableRepository;
 
 
     //Charactersheet Methoden______________________________________________
@@ -249,7 +242,7 @@ public class CharactersheetMappingController {
     )
     public @ResponseBody String
     postNote(@RequestBody NotesViewModel notesViewModel, @PathVariable int characterid){
-        String returnString = "Test";
+        String returnString;
         if(notesViewModel != null || characterid != 0) {
             Notes notes = new Notes();
             notes.setNote(notesViewModel.getNote());
@@ -388,7 +381,53 @@ public class CharactersheetMappingController {
 
 
     //Carryable_________________________________________________________________________________
+    @GetMapping("/{characterid}/carryable/all")
+    public @ResponseBody Set<Carryable>
+    getCarryablesfromCharactersheet(@PathVariable int userid, @PathVariable int groupid, @PathVariable int characterid){
 
+        return carryableRepository.findAllCarryablesFromSheet(characterid);
+    }
+
+    @PostMapping(
+            path = "/{characterid}/carryable"
+    )
+    public @ResponseBody String
+    postCarryable(@RequestBody CarryableViewModel carryableViewModel, @PathVariable int characterid){
+        String returnString;
+        if(carryableViewModel != null || characterid != 0) {
+            Carryable carryable = new Carryable();
+            carryable.setCarryable(carryableViewModel.getCarryable());
+            carryable.setAmount(carryableViewModel.getAmount());
+            carryable.setCharactersheet(charactersheetRepository.findCharactersheetByID(characterid));
+            carryableRepository.save(carryable);
+            returnString = "Carryable was saved.";
+        }
+        else
+            returnString = "No carryable to save.";
+        return returnString;
+    }
+
+    @PutMapping(
+            path = "/{characterid}/carryable/{carryableid}"
+    )
+    public void
+    putCarryable(@RequestBody CarryableViewModel carryableViewModel, @PathVariable int characterid, @PathVariable int carryableid){
+        Carryable carryable = carryableRepository.findACarryableByIds(characterid, carryableid);
+        carryable.setCarryable(carryableViewModel.getCarryable());
+        carryable.setAmount(carryableViewModel.getAmount());
+        carryableRepository.save(carryable);
+    }
+
+    @DeleteMapping(
+            path = "/{characterid}/carryable/{carryableid}/delete"
+    )
+    public @ResponseBody String
+    deleteCarryable(@PathVariable int characterid, @PathVariable int carryableid){
+        Carryable carryable = carryableRepository.findACarryableByIds(characterid, carryableid);
+        carryable.setCharactersheet(null);
+        carryableRepository.delete(carryable);
+        return "Wearable was deleted";
+    }
 
 
 

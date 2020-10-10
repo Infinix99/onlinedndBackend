@@ -322,6 +322,21 @@ public class Charactersheet {
 
 
 
+    @OneToMany(mappedBy = "charactersheet")
+    @JsonManagedReference
+    private Set<Carryable> carryables;
+
+    public Set<Carryable> getCarryables() {
+        return carryables;
+    }
+
+    public void setCarryables(Set<Carryable> carryables) {
+        this.carryables = carryables;
+    }
+
+
+
+
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn
     @JsonBackReference
