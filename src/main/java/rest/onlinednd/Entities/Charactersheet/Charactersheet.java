@@ -20,6 +20,7 @@ public class Charactersheet {
     private int speed;
     private int passivePerception;
     private int level;
+    private int inspiration;
     private boolean sheetIsVisible;
     private int groupID;
 
@@ -116,6 +117,13 @@ public class Charactersheet {
         this.groupID = groupID;
     }
 
+    public int getInspiration() {
+        return inspiration;
+    }
+
+    public void setInspiration(int inspiration) {
+        this.inspiration = inspiration;
+    }
 
     //______KOMPLEX FRONT END OPPERTATIONS______\\
 

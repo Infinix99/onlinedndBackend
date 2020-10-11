@@ -1,7 +1,6 @@
 package rest.onlinednd.MappingController;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.*;
 import rest.onlinednd.Repositories.Charactersheet.*;
@@ -25,6 +24,26 @@ public class CharactersheetMappingController {
     WearableRepository wearableRepository;
     @Autowired
     CarryableRepository carryableRepository;
+    @Autowired
+    StatsRepository statsRepository;
+    @Autowired
+    SkillsRepository skillsRepository;
+    @Autowired
+    CharacterDescriptionRepository characterDescriptionRepository;
+    @Autowired
+    SavingThrowsRepository savingThrowsRepository;
+    @Autowired
+    TreasureRepository treasureRepository;
+    @Autowired
+    LifeRepository lifeRepository;
+    @Autowired
+    ArmorProficienciesRepository armorProficienciesRepository;
+    @Autowired
+    LanguageProficienciesRepository languageProficienciesRepository;
+    @Autowired
+    ToolProficienciesRepository toolProficienciesRepository;
+    @Autowired
+    WeaponProficienciesRepository weaponProficienciesRepository;
 
 
     //Charactersheet Methoden______________________________________________
@@ -82,143 +101,238 @@ public class CharactersheetMappingController {
 
 
 
-/*
+
     //PUT Methoden__________________________________________________
 
     //PUT ON DIFFRENT ENDPOINTS
 
     @PutMapping(
-            path = "/{characterid}/stats",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/{characterid}/stats"
     )
-    public void putStats(@PathVariable int charid, @RequestBody int strength) {
+    public void putStats(@PathVariable int characterid, @RequestBody Stats stats) {
+        if(stats != null) {
+            Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+            Stats originalStats = charactersheet.getStats();
+            charactersheet.setStats(stats);
+            charactersheetRepository.save(charactersheet);
+            statsRepository.delete(originalStats);
+        }
+    }
 
+
+    @PutMapping(
+            path = "/{characterid}/skills"
+    )
+    public void putSkills(@PathVariable int characterid, @RequestBody Skills skills) {
+        if(skills != null) {
+            Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+            Skills originalSkills = charactersheet.getSkills();
+            charactersheet.setSkills(skills);
+            charactersheetRepository.save(charactersheet);
+            skillsRepository.delete(originalSkills);
+        }
+    }
+
+
+    @PutMapping(
+            path = "/{characterid}/characterdescription"
+    )
+    public void putCharacterDescription(@PathVariable int characterid, @RequestBody CharacterDescription characterDescription) {
+        if(characterDescription != null) {
+            Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+            CharacterDescription original = charactersheet.getCharacterDescription();
+            charactersheet.setCharacterDescription(characterDescription);
+            charactersheetRepository.save(charactersheet);
+            characterDescriptionRepository.delete(original);
+        }
+    }
+
+
+
+
+    @PutMapping(
+            path = "/{characterid}/savingthrows"
+    )
+    public void putSavingThrows(@PathVariable int characterid, @RequestBody SavingThrows savingThrows) {
+        if(savingThrows != null) {
+            Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+            SavingThrows original = charactersheet.getSavingThrows();
+            charactersheet.setSavingThrows(savingThrows);
+            charactersheetRepository.save(charactersheet);
+            savingThrowsRepository.delete(original);
+        }
+    }
+
+
+    @PutMapping(
+            path = "/{characterid}/treasure"
+    )
+    public void putTreasure(@PathVariable int characterid, @RequestBody Treasure treasure) {
+        if(treasure != null) {
+            Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+            Treasure original = charactersheet.getTreasure();
+            charactersheet.setTreasure(treasure);
+            charactersheetRepository.save(charactersheet);
+            treasureRepository.delete(original);
+        }
+    }
+
+
+    @PutMapping(
+            path = "/{characterid}/life"
+    )
+    public void putLife(@PathVariable int characterid, @RequestBody Life life) {
+        if(life != null) {
+            Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+            Life original = charactersheet.getLife();
+            charactersheet.setLife(life);
+            charactersheetRepository.save(charactersheet);
+            lifeRepository.delete(original);
+        }
+    }
+
+    @PutMapping(
+            path = "/{characterid}/armorproficiencies"
+    )
+    public void putArmorProf(@PathVariable int characterid, @RequestBody ArmorProficiencies armorProficiencies){
+        if(armorProficiencies != null) {
+            Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+            ArmorProficiencies original = charactersheet.getArmorProficiencies();
+            charactersheet.setArmorProficiencies(armorProficiencies);
+            charactersheetRepository.save(charactersheet);
+            armorProficienciesRepository.delete(original);
+        }
+    }
+
+    @PutMapping(
+            path = "/{characterid}/languageproficiencies"
+    )
+    public void putLanguageProf(@PathVariable int characterid, @RequestBody LanguageProficiencies languageProficiencies){
+        if(languageProficiencies != null) {
+            Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+            LanguageProficiencies original = charactersheet.getLanguageProficiencies();
+            charactersheet.setLanguageProficiencies(languageProficiencies);
+            charactersheetRepository.save(charactersheet);
+            languageProficienciesRepository.delete(original);
+        }
+    }
+
+    @PutMapping(
+            path = "/{characterid}/toolproficiencies"
+    )
+    public void putToolProf(@PathVariable int characterid, @RequestBody ToolProficiencies toolProficiencies){
+        if(toolProficiencies != null) {
+            Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+            ToolProficiencies original = charactersheet.getToolProficiencies();
+            charactersheet.setToolProficiencies(toolProficiencies);
+            charactersheetRepository.save(charactersheet);
+            toolProficienciesRepository.delete(original);
+        }
+    }
+
+    @PutMapping(
+            path = "/{characterid}/weaponproficiencies"
+    )
+    public void putWeaponProf(@PathVariable int characterid, @RequestBody WeaponProficiencies weaponProficiencies){
+        if(weaponProficiencies != null) {
+            Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+            WeaponProficiencies original = charactersheet.getWeaponProficiencies();
+            charactersheet.setWeaponProficiencies(weaponProficiencies);
+            charactersheetRepository.save(charactersheet);
+            weaponProficienciesRepository.delete(original);
+        }
+    }
+
+
+
+    //PUT ON charactersheet Table_________________________________________________
+
+    @PutMapping(
+            path = "/{characterid}/initative"
+    )
+    public void putInitiative(@PathVariable int characterid, @RequestBody int initative) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        charactersheet.setInitiative(initative);
+        charactersheetRepository.save(charactersheet);
 
     }
 
 
     @PutMapping(
-            path = "/{characterid}/skills",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/{characterid}/inspiration"
     )
-    public void putSkills(@PathVariable int charid) {
+    public void putInspiration(@PathVariable int characterid, @RequestBody int inspiration) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        charactersheet.setInspiration(inspiration);
+        charactersheetRepository.save(charactersheet);
+    }
+
+    @PutMapping(
+            path = "/{characterid}/level"
+    )
+    public void putLevel(@PathVariable int characterid, @RequestBody int level) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        charactersheet.setLevel(level);
+        charactersheetRepository.save(charactersheet);
 
     }
 
     @PutMapping(
-            path = "/{characterid}/CharacterDescription",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/{characterid}/proficiencybonus"
     )
-    public void putCharacterDescription(@PathVariable int charid) {
-
+    public void putProficiencyBonus(@PathVariable int characterid, @RequestBody int proficiencybonus) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        charactersheet.setProficiencyBonus(proficiencybonus);
+        charactersheetRepository.save(charactersheet);
     }
 
     @PutMapping(
-            path = "/{characterid}/Equipment",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/{characterid}/visibility"
     )
-    public void putEquipment(@PathVariable int charid) {
-
+    public void putVisibility(@PathVariable int characterid, @RequestBody boolean visibility) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        charactersheet.setSheetIsVisible(visibility);
+        charactersheetRepository.save(charactersheet);
     }
 
     @PutMapping(
-            path = "/{characterid}/Savingthrows",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/{characterid}/speed"
     )
-    public void putSavingThrows(@PathVariable int charid) {
-
-    }
-
-
-    @PutMapping(
-            path = "/{characterid}/Treasure",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
-    )
-    public void putTreasure(@PathVariable int charid) {
-
+    public void putSpeed(@PathVariable int characterid, @RequestBody int speed) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        charactersheet.setSpeed(speed);
+        charactersheetRepository.save(charactersheet);
     }
 
     @PutMapping(
-            path = "/{characterid}/FeaturesAndTraits",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/{characterid}/passiveperception"
     )
-    public void putFeaturesAndTraits(@PathVariable int charid) {
-
+    public void putPassivePerception(@PathVariable int characterid, @RequestBody int passiveperception) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        charactersheet.setPassivePerception(passiveperception);
+        charactersheetRepository.save(charactersheet);
     }
 
     @PutMapping(
-            path = "/{characterid}/Life",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/{characterid}/charactername"
     )
-    public void putLife(@PathVariable int charid) {
-
+    public void putCharacterName(@PathVariable int characterid, @RequestBody String charactername) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        charactersheet.setCharacterName(charactername);
+        charactersheetRepository.save(charactersheet);
     }
 
     @PutMapping(
-            path = "/{characterid}/Groups",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/{characterid}/armorclass"
     )
-    public void putGroups(@PathVariable int charid) {
-
-    }
-
-    */
-
-
-
-/*
-    //PUT ON characterid ENDPOINT_________________________________________________
-
-    @PutMapping(
-            path = "/{characterid}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
-    )
-    public void putInitiative(@PathVariable int charid) {
-
-    }
-
-    @PutMapping(
-            path = "/{characterid}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
-    )
-    public void putDefenses(@PathVariable int charid) {
-
-    }
-
-    @PutMapping(
-            path = "/{characterid}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
-    )
-    public void putInspiration(@PathVariable int charid) {
-
-    }
-
-    @PutMapping(
-            path = "/{characterid}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
-    )
-    public void putLevel(@PathVariable int charid) {
-
-    }
-
-    @PutMapping(
-            path = "/{characterid}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
-    )
-    public void putDeathSaves(@PathVariable int charid) {
-
-    }
-
-    @PutMapping(
-            path = "/{characterid}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
-    )
-    public void putVisibility(@PathVariable int charid) {
-
+    public void putArmorClass(@PathVariable int characterid, @RequestBody int armorclass) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        charactersheet.setArmorClass(armorclass);
+        charactersheetRepository.save(charactersheet);
     }
 
 
- */
+
 
     //__________Notes___________\\
 
