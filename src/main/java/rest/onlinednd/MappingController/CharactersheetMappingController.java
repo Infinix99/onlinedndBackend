@@ -5,6 +5,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 import rest.onlinednd.Entities.Charactersheet.Notes;
+import rest.onlinednd.Entities.Group;
 import rest.onlinednd.Entities.User;
 import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
 import rest.onlinednd.Repositories.Charactersheet.NotesRepository;
@@ -57,7 +58,6 @@ public class CharactersheetMappingController {
             charactersheet.setProficiencyBonus(charactersheetViewModel.getProficiencyBonus());
             charactersheet.setSpeed(charactersheetViewModel.getSpeed());
             charactersheet.setSheetIsVisible(charactersheetViewModel.isSheetIsVisible());
-            charactersheet.setGroupID(0);
             charactersheet.setRace(charactersheetViewModel.getRace());
             charactersheet.setCombatClass(charactersheetViewModel.getCombatClass());
             charactersheet.setStats(charactersheetViewModel.getStats());
@@ -71,11 +71,12 @@ public class CharactersheetMappingController {
             charactersheet.setWeaponProficiencies(charactersheetViewModel.getWeaponProficiencies());
             charactersheet.setSavingThrows(charactersheetViewModel.getSavingThrows());
             charactersheet.setNotes(charactersheetViewModel.getNotes());
+
             User user = userRepository.findUserByID(userid);
             charactersheet.setUser(user);
+            //__________________________
+            charactersheet.setGroupID(0);
 
-
-            charactersheetRepository.save(charactersheet);
             returnString ="Charakterbogen erstellt";
         }
 
@@ -85,15 +86,7 @@ public class CharactersheetMappingController {
         return returnString;
     }
 
-    @PostMapping("/{characterid}/Group/GroupAffiliation")
-    public @ResponseBody String
-    postCharactersheet(@RequestBody int characterid, @PathVariable int userid, @PathVariable int groupid) {
 
-
-
-
-        return null;
-    }
 
 
 

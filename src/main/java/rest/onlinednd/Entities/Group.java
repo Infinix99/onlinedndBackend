@@ -39,4 +39,12 @@ public class Group {
     public void setGroupID(Integer groupID) {
         this.groupID = groupID;
     }
+
+    public Set<Charactersheet> getCharactersheets() {
+        return charactersheets;
+    }
+
+    public void setCharactersheets(Set<Charactersheet> charactersheets) {
+        this.charactersheets = charactersheets;
+    }
 }

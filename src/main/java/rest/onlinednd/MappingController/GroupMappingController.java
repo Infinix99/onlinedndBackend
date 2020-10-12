@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 import rest.onlinednd.Entities.Group;
 import rest.onlinednd.Entities.User;
+import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
 import rest.onlinednd.Repositories.GroupRepository;
 
+import javax.websocket.server.PathParam;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,6 +18,8 @@ public class GroupMappingController {
 
     @Autowired
     private GroupRepository groupRepository;
+    @Autowired
+    private CharactersheetRepository charactersheetRepository;
 
     @GetMapping ("/{groupid}")
     public @ResponseBody
@@ -23,13 +27,38 @@ public class GroupMappingController {
         return groupRepository.findGroupByID(groupid);
     }
 
+    @GetMapping ("/{groupid}/AllCharactersheets")
+    public @ResponseBody
+    Set<Charactersheet> getGroupSheets (@PathVariable int groupid , @PathVariable int userid) {
+        Group group = groupRepository.findGroupByID(groupid);
 
+        return group.getCharactersheets();
 
-
-
-
-
+    }
     //_____________________________________________________________
+
+    @PostMapping("/Charactersheet/{charid}/addto/{groupid}")
+    public @ResponseBody String
+    postCharactersheetToGroup(@PathVariable int charid, @PathVariable int groupid) {
+        /*
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(charid);
+        Group group = groupRepository.findGroupByID(groupid);
+
+        group.setCharactersheets(charactersheet);
+
+        charactersheet.setGroupID(groupid);
+        charactersheetRepository.save(charactersheet);
+        groupRepository.save(group);
+
+
+         */
+        return "Charactersheet added to Group";
+
+
+    }
+
+
+
     @PostMapping(
             path = "/register"
             //consumes = {MediaType.APPLICATION_JSON_VALUE}
