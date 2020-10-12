@@ -3,6 +3,7 @@ package rest.onlinednd.Entities.Charactersheet;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.mapping.Collection;
+import rest.onlinednd.Entities.Group;
 import rest.onlinednd.Entities.User;
 
 import javax.persistence.*;
@@ -311,4 +312,7 @@ public class Charactersheet {
     public void setUser(User user) {
         this.user = user;
     }
+
+    @ManyToMany(mappedBy = "charactersheet")
+    Set<Group> groups;
 }

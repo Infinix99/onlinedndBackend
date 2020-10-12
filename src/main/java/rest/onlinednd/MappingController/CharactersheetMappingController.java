@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 import rest.onlinednd.Entities.Charactersheet.Notes;
 import rest.onlinednd.Entities.User;
-import rest.onlinednd.Entities.UserViewModel;
 import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
 import rest.onlinednd.Repositories.Charactersheet.NotesRepository;
 import rest.onlinednd.Repositories.UserRepository;
@@ -42,7 +41,7 @@ public class CharactersheetMappingController {
 
     @PostMapping
     public @ResponseBody String
-    postCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel, @PathVariable int userid) {
+    postCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel, @PathVariable int userid, @PathVariable int groupid) {
         Charactersheet charactersheet = new Charactersheet();
 
         String returnString;
@@ -71,6 +70,10 @@ public class CharactersheetMappingController {
             charactersheet.setNotes(charactersheetViewModel.getNotes());
             User user = userRepository.findUserByID(userid);
             charactersheet.setUser(user);
+
+            if (groupid != 0 ) {
+
+            }
 
 
             charactersheetRepository.save(charactersheet);

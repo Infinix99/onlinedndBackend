@@ -1,5 +1,7 @@
 package rest.onlinednd.Entities;
 
+import rest.onlinednd.Entities.Charactersheet.Charactersheet;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -13,7 +15,20 @@ public class Group {
     @ManyToMany(mappedBy = "groups")
     Set<User> users;
 
+    @ManyToMany(mappedBy = "charactersheet")
+    Set<Charactersheet> charactersheet;
+
+    private String name;
+
     public Group() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getGroupID() {
