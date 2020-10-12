@@ -15,8 +15,9 @@ public class Group {
     @ManyToMany(mappedBy = "groups")
     Set<User> users;
 
-    @ManyToMany(mappedBy = "charactersheet")
-    Set<Charactersheet> charactersheet;
+    @ManyToMany(mappedBy = "group_chars")
+    Set<Charactersheet> charactersheets;
+
 
     private String name;
 

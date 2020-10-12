@@ -313,6 +313,6 @@ public class Charactersheet {
         this.user = user;
     }
 
-    @ManyToMany(mappedBy = "charactersheet")
-    Set<Group> groups;
+    @ManyToMany
+    Set<Group> group_chars;
 }

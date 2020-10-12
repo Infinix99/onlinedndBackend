@@ -8,6 +8,7 @@ import rest.onlinednd.Entities.Charactersheet.Notes;
 import rest.onlinednd.Entities.User;
 import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
 import rest.onlinednd.Repositories.Charactersheet.NotesRepository;
+import rest.onlinednd.Repositories.GroupRepository;
 import rest.onlinednd.Repositories.UserRepository;
 import rest.onlinednd.ViewModels.CharactersheetViewModel;
 import rest.onlinednd.ViewModels.NotesViewModel;
@@ -26,6 +27,8 @@ public class CharactersheetMappingController {
     NotesRepository notesRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    GroupRepository groupRepository;
 
 
     //Charactersheet Methoden______________________________________________
@@ -54,7 +57,7 @@ public class CharactersheetMappingController {
             charactersheet.setProficiencyBonus(charactersheetViewModel.getProficiencyBonus());
             charactersheet.setSpeed(charactersheetViewModel.getSpeed());
             charactersheet.setSheetIsVisible(charactersheetViewModel.isSheetIsVisible());
-            charactersheet.setGroupID(charactersheetViewModel.getGroupID());
+            charactersheet.setGroupID(0);
             charactersheet.setRace(charactersheetViewModel.getRace());
             charactersheet.setCombatClass(charactersheetViewModel.getCombatClass());
             charactersheet.setStats(charactersheetViewModel.getStats());
@@ -70,13 +73,7 @@ public class CharactersheetMappingController {
             charactersheet.setNotes(charactersheetViewModel.getNotes());
             User user = userRepository.findUserByID(userid);
             charactersheet.setUser(user);
-/*
-            if (groupid != 0 ) {
 
-            }
-
-
- */
 
             charactersheetRepository.save(charactersheet);
             returnString ="Charakterbogen erstellt";
@@ -88,6 +85,15 @@ public class CharactersheetMappingController {
         return returnString;
     }
 
+    @PostMapping("/{characterid}/Group/GroupAffiliation")
+    public @ResponseBody String
+    postCharactersheet(@RequestBody int characterid, @PathVariable int userid, @PathVariable int groupid) {
+
+
+
+
+        return null;
+    }
 
 
 
