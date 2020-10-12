@@ -11,10 +11,10 @@ import java.util.Set;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
 
-    @Query(value = "Select * from Charactersheets c WHERE c.userid = :UserID"
-            , nativeQuery = true )
-    Set<Charactersheet> findAllCharactersheets(@Param("UserID") int UserID);
-
+    //find by ID
+    @Query(value = "select * from user u  where u.userid = :userid"
+            ,nativeQuery = true)
+    User findUserByID(@Param("userid") int userid);
 
 
 }

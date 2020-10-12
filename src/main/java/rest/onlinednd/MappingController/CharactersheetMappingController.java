@@ -5,8 +5,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 import rest.onlinednd.Entities.Charactersheet.Notes;
+import rest.onlinednd.Entities.User;
+import rest.onlinednd.Entities.UserViewModel;
 import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
 import rest.onlinednd.Repositories.Charactersheet.NotesRepository;
+import rest.onlinednd.Repositories.UserRepository;
 import rest.onlinednd.ViewModels.CharactersheetViewModel;
 import rest.onlinednd.ViewModels.NotesViewModel;
 
@@ -22,13 +25,15 @@ public class CharactersheetMappingController {
     CharactersheetRepository charactersheetRepository;
     @Autowired
     NotesRepository notesRepository;
+    @Autowired
+    UserRepository userRepository;
 
 
     //Charactersheet Methoden______________________________________________
 
     @GetMapping("/{characterid}")
     public @ResponseBody Charactersheet
-    getCharactersheet(@PathVariable int id, @PathVariable int groupid, @PathVariable int characterid) {
+    getCharactersheet(@PathVariable int userid, @PathVariable int groupid, @PathVariable int characterid) {
         if(characterid != 0)
             return charactersheetRepository.findCharactersheetByID(characterid);
         else
@@ -37,7 +42,7 @@ public class CharactersheetMappingController {
 
     @PostMapping
     public @ResponseBody String
-    postCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel) {
+    postCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel, @PathVariable int userid) {
         Charactersheet charactersheet = new Charactersheet();
 
         String returnString;
@@ -64,14 +69,16 @@ public class CharactersheetMappingController {
             charactersheet.setWeaponProficiencies(charactersheetViewModel.getWeaponProficiencies());
             charactersheet.setSavingThrows(charactersheetViewModel.getSavingThrows());
             charactersheet.setNotes(charactersheetViewModel.getNotes());
+            User user = userRepository.findUserByID(userid);
+            charactersheet.setUser(user);
 
 
             charactersheetRepository.save(charactersheet);
             returnString ="Charakterbogen erstellt";
         }
 
-        else
-            returnString = "Nichts gespeichert!";
+        else {
+            returnString = "Nichts gespeichert!"; }
 
         return returnString;
     }

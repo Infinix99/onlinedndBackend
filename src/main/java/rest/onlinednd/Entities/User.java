@@ -22,6 +22,9 @@ public class User {
     @JsonManagedReference
     private Set<Charactersheet> charactersheets;
 
+    @ManyToMany
+    Set<Group> groups;
+
 
 
     //---------------Getter Setter---------------------------------------------------

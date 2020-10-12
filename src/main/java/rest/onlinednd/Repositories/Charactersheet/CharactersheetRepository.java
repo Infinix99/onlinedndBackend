@@ -14,12 +14,17 @@ public interface CharactersheetRepository extends CrudRepository<Charactersheet,
     @Query(value="select * from Charactersheet c where c.characterName = :text"
             ,   nativeQuery =true )
         Charactersheet findCharacterByName(@Param("text") String text);
-         //Bsp. grp 2 :  @Query(value="select u from Player u where u.email = :text or u.name = :text", nativeQuery = true) Player findPlayerByEmailOrName(@Param("text") String text);
 
+    //find by ID
     @Query(value = "select * from Charactersheet c where c.charactersheetID = :characterid"
             ,nativeQuery = true)
         Charactersheet findCharactersheetByID(@Param("characterid") int characterid);
 
+
+    //find all
+    @Query(value = "Select * from Charactersheet c WHERE c.user_userid = :UserID"
+            , nativeQuery = true )
+        Set<Charactersheet> findAllCharactersheets(@Param("UserID") int UserID);
 
 
 
