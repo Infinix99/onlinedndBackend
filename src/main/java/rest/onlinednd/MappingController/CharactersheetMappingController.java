@@ -70,11 +70,13 @@ public class CharactersheetMappingController {
             charactersheet.setNotes(charactersheetViewModel.getNotes());
             User user = userRepository.findUserByID(userid);
             charactersheet.setUser(user);
-
+/*
             if (groupid != 0 ) {
 
             }
 
+
+ */
 
             charactersheetRepository.save(charactersheet);
             returnString ="Charakterbogen erstellt";
