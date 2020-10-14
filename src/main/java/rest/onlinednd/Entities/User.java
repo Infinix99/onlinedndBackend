@@ -70,4 +70,18 @@ public class User {
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
+
+    public Set<Group> deleteGroups(Group group) {
+        this.groups.remove(group);
+        group.getUsers().remove(this);
+
+        return groups;
+    }
+
+    public void removeFromGroup(Group group) {
+        this.getGroups().remove(group);
+
+
+    }
+
 }

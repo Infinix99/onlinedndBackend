@@ -56,6 +56,11 @@ public class UserMappingController {
 
 //________________________________________________________________________________________
 
+    //TODO:
+    // CREATE USER
+    // DELETE USER
+    // MANAGE USER
+
     @PostMapping(
             path = "/register"
             //consumes = {MediaType.APPLICATION_JSON_VALUE}

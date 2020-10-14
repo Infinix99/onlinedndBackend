@@ -79,7 +79,6 @@ public class CharactersheetMappingController {
 
             User user = userRepository.findUserByID(userid);
             charactersheet.setUser(user);
-            //__________________________
 
             charactersheetRepository.save(charactersheet);
 

@@ -44,6 +44,8 @@ public class GroupMappingController {
     }
     //_____________________________________________________________
 
+    // CREATE A GROUP WITH A USER
+
     @PostMapping("/CreateGroup")
     public @ResponseBody String
     postCreateGroup(@RequestBody GroupViewModel groupViewModel, @PathVariable int userid) {
@@ -64,6 +66,8 @@ public class GroupMappingController {
         return "Gruppe wurde angelegt";
     }
 
+    // ADD USER TO GROUP
+
     @PostMapping("/{groupid}/addToGroup")
     public @ResponseBody String
     postaddToGroup(@PathVariable int userid, @PathVariable int groupid) {
@@ -83,9 +87,49 @@ public class GroupMappingController {
         return "User "+user.getName()+" ist der Gruppe "+group.getName()+" beigetreten";
     }
 
+    // REMOVE USER FROM GROUP
+
+    @DeleteMapping("/{groupid}/removeFromGroup")
+    public @ResponseBody String
+    putRemoveFromGroup(@PathVariable int userid, @PathVariable int groupid) {
+        User user = userRepository.findUserByID(userid);
+        Group group = groupRepository.findGroupByID(groupid);
+
+        user.removeFromGroup(group);
+
+        userRepository.save(user);
+        groupRepository.save(group);
+
+
+        return "User " +user.getName()+" has been removed from Group " +group.getName();
+
+    }
+
+    // DELETE WHOLE GROUP
+
+    @DeleteMapping("/{groupid}/deleteGroup")
+    public  @ResponseBody
+    String deleteGroup(@PathVariable int groupid, @PathVariable int userid){
+        User user = userRepository.findUserByID(userid);
+        Group group = groupRepository.findGroupByID(groupid);
+
+        Set<User> userSet = group.getUsers();
+
+        for (User u : userSet){
+            u.removeFromGroup(group); }
+
+        group.deleteGroups(user);
+
+        userRepository.save(user);
+        groupRepository.delete(group);
+
+        return "Group has been deleted";
+    }
+
+
+
+
     // TODO:
-    // USER REMOVE FROM GROUP
-    // DELETE GROUP
     // Charactersheets - Group oneToMany ändern
     // --> Post etc.
 

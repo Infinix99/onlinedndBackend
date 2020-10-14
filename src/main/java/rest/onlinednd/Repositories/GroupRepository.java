@@ -21,5 +21,7 @@ public interface GroupRepository extends CrudRepository<Group, Integer> {
             , nativeQuery = true )
     Set<Charactersheet> findAllCharactersheets(@Param("UserID") int UserID);
 
+    //
+
     }
 
