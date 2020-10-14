@@ -21,6 +21,7 @@ public class Charactersheet {
     private int speed;
     private int passivePerception;
     private int level;
+    int inspiration;
     private boolean sheetIsVisible;
     private int groupID;
 
@@ -117,6 +118,13 @@ public class Charactersheet {
         this.groupID = groupID;
     }
 
+    public int getInspiration() {
+        return inspiration;
+    }
+
+    public void setInspiration(int inspiration) {
+        this.inspiration = inspiration;
+    }
 
     //______KOMPLEX FRONT END OPPERTATIONS______\\
 
@@ -298,6 +306,45 @@ public class Charactersheet {
     @OneToMany(mappedBy = "charactersheet")
     @JsonManagedReference
     private Set<Equippable> equippables;
+
+    public Set<Equippable> getEquippables() {
+        return equippables;
+    }
+
+    public void setEquippables(Set<Equippable> equippables) {
+        this.equippables = equippables;
+    }
+
+
+
+
+    @OneToMany(mappedBy = "charactersheet")
+    @JsonManagedReference
+    private Set<Wearable> wearables;
+
+    public Set<Wearable> getWearables() {
+        return wearables;
+    }
+
+    public void setWearables(Set<Wearable> wearables) {
+        this.wearables = wearables;
+    }
+
+
+
+
+    @OneToMany(mappedBy = "charactersheet")
+    @JsonManagedReference
+    private Set<Carryable> carryables;
+
+    public Set<Carryable> getCarryables() {
+        return carryables;
+    }
+
+    public void setCarryables(Set<Carryable> carryables) {
+        this.carryables = carryables;
+    }
+
 
 
     @ManyToOne(cascade = {CascadeType.ALL})
