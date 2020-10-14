@@ -1,11 +1,13 @@
 package rest.onlinednd.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity(name="group_table")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "users"})
 public class Group {
 
     @Id
@@ -46,5 +48,13 @@ public class Group {
 
     public void setCharactersheets(Set<Charactersheet> charactersheets) {
         this.charactersheets = charactersheets;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

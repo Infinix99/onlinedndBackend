@@ -14,6 +14,7 @@ import rest.onlinednd.Repositories.UserRepository;
 import rest.onlinednd.ViewModels.CharactersheetViewModel;
 import rest.onlinednd.ViewModels.NotesViewModel;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -72,10 +73,15 @@ public class CharactersheetMappingController {
             charactersheet.setSavingThrows(charactersheetViewModel.getSavingThrows());
             charactersheet.setNotes(charactersheetViewModel.getNotes());
 
+
+            charactersheet.setGroupID(1);
+
+
             User user = userRepository.findUserByID(userid);
             charactersheet.setUser(user);
             //__________________________
-            charactersheet.setGroupID(0);
+
+            charactersheetRepository.save(charactersheet);
 
             returnString ="Charakterbogen erstellt";
         }
@@ -87,6 +93,31 @@ public class CharactersheetMappingController {
     }
 
 
+    @PostMapping("/{characterid}/addToGroup")
+    public @ResponseBody String
+    postCharactersheetToGroup(@PathVariable int characterid, @PathVariable int groupid) {
+
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        Group group = groupRepository.findGroupByID(groupid);
+
+        Set<Charactersheet> charactersheetSet = new HashSet<Charactersheet>();
+        charactersheetSet.add(charactersheet);
+        group.setCharactersheets(charactersheetSet);
+
+        Set<Group> groupSet = new HashSet<Group>();
+
+
+        charactersheet.setGroupID(groupid);
+
+        charactersheetRepository.save(charactersheet);
+        groupRepository.save(group);
+
+
+        return "Charactersheet " + charactersheet.getCharacterName()+ " added to Group" + group.getName();
+
+
+
+    }
 
 
 
