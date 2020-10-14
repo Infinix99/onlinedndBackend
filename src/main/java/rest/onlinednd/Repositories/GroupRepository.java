@@ -16,12 +16,12 @@ public interface GroupRepository extends CrudRepository<Group, Integer> {
             ,nativeQuery = true)
     Group findGroupByID(@Param("Groupid") int Groupid);
 
-    //find all
-    @Query(value = "Select * from group_table g WHERE c.user_userid = :UserID"
-            , nativeQuery = true )
-    Set<Charactersheet> findAllCharactersheets(@Param("UserID") int UserID);
 
-    //
+
+
+
+
+
 
     }
 

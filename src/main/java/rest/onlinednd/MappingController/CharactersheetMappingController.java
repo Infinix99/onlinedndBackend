@@ -44,6 +44,14 @@ public class CharactersheetMappingController {
             return null;
     }
 
+    @GetMapping ("/GroupCharactersheets")
+    public @ResponseBody
+    Set<Charactersheet> getGroupCharactersheets (@PathVariable int groupid) {
+    Set<Charactersheet> chars = charactersheetRepository.findAllCharsFromGroup(groupid);
+            return chars;
+
+    }
+
     @PostMapping
     public @ResponseBody String
     postCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel, @PathVariable int userid, @PathVariable int groupid) {
@@ -91,8 +99,22 @@ public class CharactersheetMappingController {
         return returnString;
     }
 
+    // ADD CHARACTERSHEET TO A GROUP VIA GROUP ID
+    @PutMapping("/{characterid}/addToGroup")
+    public @ResponseBody String
+    putCharacterSheetToGroup(@PathVariable int characterid, @PathVariable int groupid) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        charactersheet.setGroupID(groupid);
 
-    @PostMapping("/{characterid}/addToGroup")
+        Group group = groupRepository.findGroupByID(groupid);
+
+        charactersheetRepository.save(charactersheet);
+
+        return "Charactersheet "+charactersheet.getCharacterName()+" has been added to Group " +group.getName();
+
+    }
+/*
+    @PutMapping("/{characterid}/addToGroup")
     public @ResponseBody String
     postCharactersheetToGroup(@PathVariable int characterid, @PathVariable int groupid) {
 
@@ -118,7 +140,7 @@ public class CharactersheetMappingController {
 
     }
 
-
+ */
 
 
 /*

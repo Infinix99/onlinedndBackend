@@ -26,6 +26,9 @@ public interface CharactersheetRepository extends CrudRepository<Charactersheet,
             , nativeQuery = true )
         Set<Charactersheet> findAllCharactersheets(@Param("UserID") int UserID);
 
-
+    //find all from Group
+    @Query(value = "Select * from Charactersheet c WHERE c.groupid = :Groupid"
+            , nativeQuery = true)
+    Set<Charactersheet> findAllCharsFromGroup(@Param("Groupid") int Groupid);
 
 }

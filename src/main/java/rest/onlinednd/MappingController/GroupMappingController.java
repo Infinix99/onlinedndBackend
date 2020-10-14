@@ -26,6 +26,7 @@ public class GroupMappingController {
     @Autowired
     private UserRepository userRepository;
 
+
     @GetMapping ("/{groupid}")
     public @ResponseBody
     Group getGroup (@PathVariable int groupid , @PathVariable int userid) {
@@ -33,20 +34,13 @@ public class GroupMappingController {
         return group;
     }
 
-    @GetMapping ("/{groupid}/AllCharactersheets")
-    public @ResponseBody
-    Set<Charactersheet> getGroupSheets (@PathVariable int groupid , @PathVariable int userid) {
-        Group group = groupRepository.findGroupByID(groupid);
 
 
-        return group.getCharactersheets();
-
-    }
     //_____________________________________________________________
 
     // CREATE A GROUP WITH A USER
 
-    @PostMapping("/CreateGroup")
+    @PostMapping("/createGroup")
     public @ResponseBody String
     postCreateGroup(@RequestBody GroupViewModel groupViewModel, @PathVariable int userid) {
         Group group = new Group();
