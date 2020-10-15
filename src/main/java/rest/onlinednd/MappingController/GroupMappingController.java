@@ -123,9 +123,7 @@ public class GroupMappingController {
 
 
 
-    // TODO:
-    // Charactersheets - Group oneToMany ändern
-    // --> Post etc.
+
 
 
         /*

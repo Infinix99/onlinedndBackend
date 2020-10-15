@@ -113,6 +113,19 @@ public class CharactersheetMappingController {
         return "Charactersheet "+charactersheet.getCharacterName()+" has been added to Group " +group.getName();
 
     }
+
+    // REMOVE FROM GROUP
+    @PutMapping("/{characterid}/removeFromGroup")
+    public @ResponseBody String
+    removeCharFromGroup(@PathVariable int characterid, @PathVariable int groupid) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        charactersheet.setGroupID(1);
+        charactersheetRepository.save(charactersheet);
+
+        return "Charactersheet " +charactersheet.getCharacterName()+" has been removed from the Group";
+    }
+
+
 /*
     @PutMapping("/{characterid}/addToGroup")
     public @ResponseBody String
