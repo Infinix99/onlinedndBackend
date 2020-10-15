@@ -24,7 +24,7 @@ public class AlexaMappingController {
     /*
     @GetMapping("/{groupid}")
     public @ResponseBody
-    Optional<Charactersheet> getCharactersheet(@PathVariable int id, @PathVariable int groupid, @PathVariable int charid) {
+    Optional<Charactersheet> getCharactersheet(@PathVariable int id, @PathVariable int groupid, @PathVariable int characterid) {
 
         return charactersheetRepository.findById(charid);
     }
@@ -33,7 +33,7 @@ public class AlexaMappingController {
     //ALEXA Methoden___________________________________________
 
     @PostMapping("/{charid}")
-    public AlexaRO getHitPoints(@RequestBody AlexaRO alexaRO, @PathVariable int id, @PathVariable int groupid, @PathVariable int charid) {
+    public AlexaRO getHitPoints(@RequestBody AlexaRO alexaRO, @PathVariable int id, @PathVariable int groupid, @PathVariable int characterid) {
         String outText = "";
 
         if (alexaRO.getRequest().getType().equalsIgnoreCase("LaunchRequest"))
@@ -50,7 +50,7 @@ public class AlexaMappingController {
 //GET CURRENT HP__________________________________________________________________________________________________________
                         case "GetCurrentHealth" :
                 try {
-                    String charname = ((HashMap<String ,String>)(alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("CharacterName"))).get("value");  //Erklärung notwendig lma-fucking-o
+                    String charname = ((HashMap<String ,String>)(alexaRO.getRequest().getIntent().getSlots().getAdditionalProperties().get("CharacterName"))).get("value");
                     Charactersheet charsheet = charactersheetRepository.findCharacterByName(charname);
 
                     outText = (String) charname + "has" + charsheet.getLife().getCurrentHitPoints() + "!";
