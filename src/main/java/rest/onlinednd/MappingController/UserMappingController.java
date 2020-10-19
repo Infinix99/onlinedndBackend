@@ -1,12 +1,14 @@
 package rest.onlinednd.MappingController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 import rest.onlinednd.Entities.User;
 import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
 import rest.onlinednd.Repositories.UserRepository;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
@@ -35,11 +37,11 @@ public class UserMappingController {
 
  */
 
-//CHARACTERSHEET USER GETS (GRUPPENUNABHÄNGIG)____________________________________________
+    //CHARACTERSHEET USER GETS (GRUPPENUNABHÄNGIG)____________________________________________
     @GetMapping("/{userid}/Charactersheets/all")
     public @ResponseBody
-    Set<Charactersheet> getAllCharactersheets(@PathVariable int userid ) {
-        if(userid != 0)
+    Set<Charactersheet> getAllCharactersheets(@PathVariable int userid) {
+        if (userid != 0)
             return charactersheetRepository.findAllCharactersheets(userid);
         else
             return null;
@@ -47,8 +49,8 @@ public class UserMappingController {
 
     @GetMapping("/{userid}/Charactersheets/{characterid}")
     public @ResponseBody
-    Charactersheet getAllCharactersheets(@PathVariable int userid , @PathVariable int characterid) {
-        if(userid != 0 && characterid != 0 )
+    Charactersheet getAllCharactersheets(@PathVariable int userid, @PathVariable int characterid) {
+        if (userid != 0 && characterid != 0)
             return charactersheetRepository.findCharactersheetByID(characterid);
         else
             return null;
@@ -62,17 +64,25 @@ public class UserMappingController {
     // MANAGE USER
 
     @PostMapping(
-            path = "/register"
-            //consumes = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/register",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     //@ResponseStatus(HttpStatus.OK)
-    public @ResponseBody String postUser(@RequestBody User user) {
-        if(user != null)
+    @CrossOrigin
+    public @ResponseBody
+    User postUser(@RequestBody User user) {
+        try {
+            if (user == null)
+                throw new Exception();
+
             userRepository.save(user);
+            return user;
 
-        return "Account " + user.getName() + " wurde angelegt";
+        } catch (Exception e) {
+            return null;
+        }
+
     }
-
 
 
 //    @PostMapping(
