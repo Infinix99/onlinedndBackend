@@ -21,6 +21,8 @@ public class Wearable {
 
 
     private String wearable;
+    private String details;
+    private int armorClass;
 
     public Wearable() {
     }
@@ -47,5 +49,21 @@ public class Wearable {
 
     public void setWearable(String wearable) {
         this.wearable = wearable;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public int getArmorClass() {
+        return armorClass;
+    }
+
+    public void setArmorClass(int armorClass) {
+        this.armorClass = armorClass;
     }
 }

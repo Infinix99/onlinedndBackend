@@ -36,6 +36,7 @@ public class UserMappingController {
  */
 
 //CHARACTERSHEET USER GETS (GRUPPENUNABHÄNGIG)____________________________________________
+    @CrossOrigin
     @GetMapping("/{userid}/Charactersheets/all")
     public @ResponseBody
     Set<Charactersheet> getAllCharactersheets(@PathVariable int userid ) {
@@ -45,14 +46,6 @@ public class UserMappingController {
             return null;
     }
 
-    @GetMapping("/{userid}/Charactersheets/{characterid}")
-    public @ResponseBody
-    Charactersheet getAllCharactersheets(@PathVariable int userid , @PathVariable int characterid) {
-        if(userid != 0 && characterid != 0 )
-            return charactersheetRepository.findCharactersheetByID(characterid);
-        else
-            return null;
-    }
 
 //________________________________________________________________________________________
 
@@ -63,9 +56,7 @@ public class UserMappingController {
 
     @PostMapping(
             path = "/register"
-            //consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
-    //@ResponseStatus(HttpStatus.OK)
     public @ResponseBody String postUser(@RequestBody User user) {
         if(user != null)
             userRepository.save(user);
@@ -108,9 +99,10 @@ public class UserMappingController {
 //    }
 //
 //    @DeleteMapping(
-//            path = ("/{id}")
+//            path = ("/{userid}")
 //    )
-//    public String deleteUser(@PathVariable int id) {
+//    public @ResponseBody String deleteUser(@PathVariable int userid) {
+//        userRepository.delete(userRepository.findUserByID(userid));
 //        return "Account wurde gelöscht";
 //    }
 }
