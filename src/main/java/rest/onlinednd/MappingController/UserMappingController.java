@@ -37,7 +37,8 @@ public class UserMappingController {
 
  */
 
-    //CHARACTERSHEET USER GETS (GRUPPENUNABHÄNGIG)____________________________________________
+//CHARACTERSHEET USER GETS (GRUPPENUNABHÄNGIG)____________________________________________
+    @CrossOrigin
     @GetMapping("/{userid}/Charactersheets/all")
     public @ResponseBody
     Set<Charactersheet> getAllCharactersheets(@PathVariable int userid) {
@@ -118,9 +119,10 @@ public class UserMappingController {
 //    }
 //
 //    @DeleteMapping(
-//            path = ("/{id}")
+//            path = ("/{userid}")
 //    )
-//    public String deleteUser(@PathVariable int id) {
+//    public @ResponseBody String deleteUser(@PathVariable int userid) {
+//        userRepository.delete(userRepository.findUserByID(userid));
 //        return "Account wurde gelöscht";
 //    }
 }

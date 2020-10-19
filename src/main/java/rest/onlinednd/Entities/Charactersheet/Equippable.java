@@ -21,6 +21,8 @@ public class Equippable {
 
 
     private String equippable;
+    private String details;
+    private int attackBonus;
 
     public Equippable() {
     }
@@ -47,5 +49,21 @@ public class Equippable {
 
     public void setEquippable(String equippable) {
         this.equippable = equippable;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public int getAttackBonus() {
+        return attackBonus;
+    }
+
+    public void setAttackBonus(int attackBonus) {
+        this.attackBonus = attackBonus;
     }
 }

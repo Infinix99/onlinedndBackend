@@ -58,6 +58,7 @@ public class CharactersheetMappingController {
 
     //Charactersheet Methoden______________________________________________
 
+    @CrossOrigin//(origins = "http://localhost:8080/")
     @GetMapping("/{characterid}")
     public @ResponseBody Charactersheet
     getCharactersheet(@PathVariable int userid, @PathVariable int groupid, @PathVariable int characterid) {
@@ -487,6 +488,8 @@ public class CharactersheetMappingController {
         if(equippableViewModel != null || characterid != 0) {
             Equippable equippable = new Equippable();
             equippable.setEquippable(equippableViewModel.getEquippable());
+            equippable.setDetails(equippableViewModel.getDetails());
+            equippable.setAttackBonus(equippableViewModel.getAttackBonus());
             equippable.setCharactersheet(charactersheetRepository.findCharactersheetByID(characterid));
             equippableRepository.save(equippable);
             returnString = "Equippable was saved.";
@@ -538,6 +541,8 @@ public class CharactersheetMappingController {
         if(wearableViewModel != null || characterid != 0) {
             Wearable wearable = new Wearable();
             wearable.setWearable(wearableViewModel.getWearable());
+            wearable.setDetails(wearableViewModel.getDetails());
+            wearable.setArmorClass(wearableViewModel.getArmorClass());
             wearable.setCharactersheet(charactersheetRepository.findCharactersheetByID(characterid));
             wearableRepository.save(wearable);
             returnString = "Wearable was saved.";
