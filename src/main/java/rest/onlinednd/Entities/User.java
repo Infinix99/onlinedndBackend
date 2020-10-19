@@ -20,6 +20,8 @@ public class User {
 
     private String email;
 
+    private String password;
+
     @OneToMany(mappedBy = "user")
     @JsonManagedReference
     private Set<Charactersheet> charactersheets;
@@ -84,4 +86,19 @@ public class User {
 
     }
 
+    public Integer getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(Integer userID) {
+        UserID = userID;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
