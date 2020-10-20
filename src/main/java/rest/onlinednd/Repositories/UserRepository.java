@@ -21,6 +21,10 @@ public interface UserRepository extends CrudRepository<User, Integer> {
     @Query(value = "select * from user u order by u.userid desc limit 1", nativeQuery = true)
     User latestUser ();
 
+    //find by Name
+    @Query(value = "select * from user u  where u.name = :name", nativeQuery = true)
+    User findUserByName(@Param("name") String username);
+
 
 
 }

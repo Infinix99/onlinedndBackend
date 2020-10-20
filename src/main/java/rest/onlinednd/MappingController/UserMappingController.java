@@ -1,12 +1,14 @@
 package rest.onlinednd.MappingController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 import rest.onlinednd.Entities.User;
 import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
 import rest.onlinednd.Repositories.UserRepository;
+import rest.onlinednd.ViewModels.UserViewModel;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -86,17 +88,20 @@ public class UserMappingController {
     }
 
 
-//    @PostMapping(
-//            path = "/login",
-//            consumes = {MediaType.APPLICATION_JSON_VALUE}
-//    )
-//    @ResponseStatus(HttpStatus.OK)
-//    public int loginUser() {
-//        int localID = 0;
-//
-//
-//        return localID;
-//    }
+    @PostMapping(
+            path = "/login",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    @CrossOrigin
+    public @ResponseBody
+    User loginUser(@RequestBody UserViewModel userViewModel) {
+
+            String name =  userViewModel.getUsername();
+            User u = userRepository.findUserByName(name);
+            if (u==null) return null;
+            if (!u.getPassword().equals(userViewModel.getPassword())) return null;
+            return u;
+    }
 //
 //    @PutMapping(
 //            path = "/{id}",
