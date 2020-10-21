@@ -2,6 +2,7 @@ package rest.onlinednd.MappingController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.*;
 import rest.onlinednd.Entities.Group;
@@ -14,6 +15,7 @@ import rest.onlinednd.ViewModels.*;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/api/v1.0/User/{userid}/Group/{groupid}/Charactersheet")
@@ -186,7 +188,8 @@ public class CharactersheetMappingController {
     //PUT ON DIFFRENT ENDPOINTS
 
     @PutMapping(
-            path = "/{characterid}/stats"
+            path = "/{characterid}/stats",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putStats(@PathVariable int characterid, @RequestBody Stats stats) {
         if(stats != null) {
@@ -200,7 +203,8 @@ public class CharactersheetMappingController {
 
 
     @PutMapping(
-            path = "/{characterid}/skills"
+            path = "/{characterid}/skills",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putSkills(@PathVariable int characterid, @RequestBody Skills skills) {
         if(skills != null) {
@@ -214,7 +218,8 @@ public class CharactersheetMappingController {
 
 
     @PutMapping(
-            path = "/{characterid}/characterdescription"
+            path = "/{characterid}/characterdescription",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putCharacterDescription(@PathVariable int characterid, @RequestBody CharacterDescription characterDescription) {
         if(characterDescription != null) {
@@ -228,9 +233,10 @@ public class CharactersheetMappingController {
 
 
 
-
+    @CrossOrigin
     @PutMapping(
-            path = "/{characterid}/savingthrows"
+            path = "/{characterid}/savingthrows",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putSavingThrows(@PathVariable int characterid, @RequestBody SavingThrows savingThrows) {
         if(savingThrows != null) {
@@ -243,10 +249,12 @@ public class CharactersheetMappingController {
     }
 
 
+    @CrossOrigin
     @PutMapping(
-            path = "/{characterid}/treasure"
+            path = "/{characterid}/treasure",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
-    public void putTreasure(@PathVariable int characterid, @RequestBody Treasure treasure) {
+    public void putTreasure(@PathVariable int characterid, @RequestBody Treasure treasure){
         if(treasure != null) {
             Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
             Treasure original = charactersheet.getTreasure();
@@ -256,9 +264,10 @@ public class CharactersheetMappingController {
         }
     }
 
-
+    @CrossOrigin
     @PutMapping(
-            path = "/{characterid}/life"
+            path = "/{characterid}/life",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putLife(@PathVariable int characterid, @RequestBody Life life) {
         if(life != null) {
@@ -271,7 +280,8 @@ public class CharactersheetMappingController {
     }
 
     @PutMapping(
-            path = "/{characterid}/armorproficiencies"
+            path = "/{characterid}/armorproficiencies",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putArmorProf(@PathVariable int characterid, @RequestBody ArmorProficiencies armorProficiencies){
         if(armorProficiencies != null) {
@@ -284,7 +294,8 @@ public class CharactersheetMappingController {
     }
 
     @PutMapping(
-            path = "/{characterid}/languageproficiencies"
+            path = "/{characterid}/languageproficiencies",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putLanguageProf(@PathVariable int characterid, @RequestBody LanguageProficiencies languageProficiencies){
         if(languageProficiencies != null) {
@@ -297,7 +308,8 @@ public class CharactersheetMappingController {
     }
 
     @PutMapping(
-            path = "/{characterid}/toolproficiencies"
+            path = "/{characterid}/toolproficiencies",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putToolProf(@PathVariable int characterid, @RequestBody ToolProficiencies toolProficiencies){
         if(toolProficiencies != null) {
@@ -310,7 +322,8 @@ public class CharactersheetMappingController {
     }
 
     @PutMapping(
-            path = "/{characterid}/weaponproficiencies"
+            path = "/{characterid}/weaponproficiencies",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putWeaponProf(@PathVariable int characterid, @RequestBody WeaponProficiencies weaponProficiencies){
         if(weaponProficiencies != null) {
@@ -327,7 +340,8 @@ public class CharactersheetMappingController {
     //PUT ON charactersheet Table_________________________________________________
 
     @PutMapping(
-            path = "/{characterid}/initative"
+            path = "/{characterid}/initative",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putInitiative(@PathVariable int characterid, @RequestBody int initative) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
@@ -338,7 +352,8 @@ public class CharactersheetMappingController {
 
 
     @PutMapping(
-            path = "/{characterid}/inspiration"
+            path = "/{characterid}/inspiration",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putInspiration(@PathVariable int characterid, @RequestBody int inspiration) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
@@ -347,7 +362,8 @@ public class CharactersheetMappingController {
     }
 
     @PutMapping(
-            path = "/{characterid}/level"
+            path = "/{characterid}/level",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putLevel(@PathVariable int characterid, @RequestBody int level) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
@@ -357,7 +373,8 @@ public class CharactersheetMappingController {
     }
 
     @PutMapping(
-            path = "/{characterid}/proficiencybonus"
+            path = "/{characterid}/proficiencybonus",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putProficiencyBonus(@PathVariable int characterid, @RequestBody int proficiencybonus) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
@@ -366,7 +383,8 @@ public class CharactersheetMappingController {
     }
 
     @PutMapping(
-            path = "/{characterid}/visibility"
+            path = "/{characterid}/visibility",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putVisibility(@PathVariable int characterid, @RequestBody boolean visibility) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
@@ -375,7 +393,8 @@ public class CharactersheetMappingController {
     }
 
     @PutMapping(
-            path = "/{characterid}/speed"
+            path = "/{characterid}/speed",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putSpeed(@PathVariable int characterid, @RequestBody int speed) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
@@ -384,7 +403,8 @@ public class CharactersheetMappingController {
     }
 
     @PutMapping(
-            path = "/{characterid}/passiveperception"
+            path = "/{characterid}/passiveperception",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putPassivePerception(@PathVariable int characterid, @RequestBody int passiveperception) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
@@ -393,7 +413,8 @@ public class CharactersheetMappingController {
     }
 
     @PutMapping(
-            path = "/{characterid}/charactername"
+            path = "/{characterid}/charactername",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putCharacterName(@PathVariable int characterid, @RequestBody String charactername) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
@@ -402,7 +423,8 @@ public class CharactersheetMappingController {
     }
 
     @PutMapping(
-            path = "/{characterid}/armorclass"
+            path = "/{characterid}/armorclass",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void putArmorClass(@PathVariable int characterid, @RequestBody int armorclass) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
@@ -429,9 +451,10 @@ public class CharactersheetMappingController {
         return notesRepository.findById(notesid);
     }
 
-
+    @CrossOrigin
     @PostMapping(
-            path = "/{characterid}/notes"
+            path = "/{characterid}/notes",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public @ResponseBody String
     postNote(@RequestBody NotesViewModel notesViewModel, @PathVariable int characterid){
@@ -448,8 +471,10 @@ public class CharactersheetMappingController {
         return returnString;
     }
 
+    @CrossOrigin
     @PutMapping(
-            path = "/{characterid}/notes/{notesid}"
+            path = "/{characterid}/notes/{notesid}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public void
     putNote(@RequestBody NotesViewModel notesViewModel, @PathVariable int characterid, @PathVariable int notesid){
