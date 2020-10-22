@@ -56,6 +56,7 @@ public class UserMappingController {
     }
 
 //GET ALL GROUPS FROM USER____________________________________________
+    @CrossOrigin
     @GetMapping("/{userid}/ViewGroups")
     public @ResponseBody
     Set<Group> getAllGroupsFromUser(@PathVariable int userid ) {
