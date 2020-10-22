@@ -75,6 +75,8 @@ public class CharactersheetMappingController {
 
     }
 
+
+
     @PostMapping
     public @ResponseBody String
     postCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel, @PathVariable int userid, @PathVariable int groupid) {

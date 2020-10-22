@@ -19,7 +19,7 @@ public class LanguageProficiencies {
     private boolean Draconic;
     private boolean Dwarvish;
     private boolean Elvish;
-    private boolean Giant;
+    private boolean Giant; //___
     private boolean Gnomish;
     private boolean Goblin;
     private boolean Halfling;
@@ -27,7 +27,7 @@ public class LanguageProficiencies {
     private boolean Orc;
     private boolean Primordial;
     private boolean Sylvan;
-    private boolean Undercommon;
+    private boolean Undercommon;        //16
 
     public LanguageProficiencies( ) { }
 
