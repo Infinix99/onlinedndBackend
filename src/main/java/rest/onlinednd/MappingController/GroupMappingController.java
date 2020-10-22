@@ -1,6 +1,7 @@
 package rest.onlinednd.MappingController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 import rest.onlinednd.Entities.Group;
@@ -40,7 +41,11 @@ public class GroupMappingController {
 
     // CREATE A GROUP WITH A USER
 
-    @PostMapping("/createGroup")
+    @CrossOrigin
+    @PostMapping(
+            path ="/createGroup",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
     public @ResponseBody String
     postCreateGroup(@RequestBody GroupViewModel groupViewModel, @PathVariable int userid) {
         Group group = new Group();
@@ -62,7 +67,11 @@ public class GroupMappingController {
 
     // ADD USER TO GROUP
 
-    @PostMapping("/{groupid}/addToGroup")
+    @CrossOrigin
+    @PostMapping(
+            path = "/{groupid}/addToGroup",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
     public @ResponseBody String
     postaddToGroup(@PathVariable int userid, @PathVariable int groupid) {
         User user = userRepository.findUserByID(userid);

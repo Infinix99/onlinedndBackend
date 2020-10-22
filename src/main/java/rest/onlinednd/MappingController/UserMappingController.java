@@ -26,6 +26,7 @@ public class UserMappingController {
 
 
     @GetMapping("/{id}")
+    @CrossOrigin
     public @ResponseBody
     Optional<User> getUser(@PathVariable int id) {
         return userRepository.findById(id);
