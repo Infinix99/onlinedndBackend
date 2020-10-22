@@ -5,8 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
+import rest.onlinednd.Entities.Group;
 import rest.onlinednd.Entities.User;
 import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
+import rest.onlinednd.Repositories.GroupRepository;
 import rest.onlinednd.Repositories.UserRepository;
 import rest.onlinednd.ViewModels.UserViewModel;
 
@@ -23,6 +25,8 @@ public class UserMappingController {
     private UserRepository userRepository;
     @Autowired
     private CharactersheetRepository charactersheetRepository;
+    @Autowired
+    private GroupRepository groupRepository;
 
 
     @GetMapping("/{id}")
@@ -50,6 +54,18 @@ public class UserMappingController {
         else
             return null;
     }
+
+//GET ALL GROUPS FROM USER____________________________________________
+    @GetMapping("/{userid}/ViewGroups")
+    public @ResponseBody
+    Set<Group> getAllGroupsFromUser(@PathVariable int userid ) {
+        if(userid != 0)
+            return groupRepository.findGroupByUserID(userid);
+        else
+            return null;
+    }
+
+
 
     @GetMapping("/{userid}/Charactersheets/{characterid}")
     public @ResponseBody

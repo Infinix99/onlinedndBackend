@@ -16,7 +16,10 @@ public interface GroupRepository extends CrudRepository<Group, Integer> {
             ,nativeQuery = true)
     Group findGroupByID(@Param("Groupid") int Groupid);
 
-
+    //Find Group by UserID
+    @Query(value = "select * from group_table u INNER JOIN user_groups ON groupid = groups_groupid WHERE users_userid = :userid "
+            ,nativeQuery = true)
+    Set<Group> findGroupByUserID(@Param("userid") int userid);
 
 
 

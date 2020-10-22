@@ -20,7 +20,7 @@ public class Charactersheet {
     private int proficiencyBonus;
     private int speed;
     private int passivePerception;
-    private int level;
+    private int level;                              //INPUT
     int inspiration;
     private boolean sheetIsVisible;
     private int groupID;
