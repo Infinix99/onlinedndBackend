@@ -1,6 +1,8 @@
 package rest.onlinednd.MappingController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
 import rest.onlinednd.Entities.Group;
@@ -8,7 +10,9 @@ import rest.onlinednd.Entities.User;
 import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
 import rest.onlinednd.Repositories.GroupRepository;
 import rest.onlinednd.Repositories.UserRepository;
+import rest.onlinednd.ViewModels.UserViewModel;
 
+import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
@@ -40,10 +44,11 @@ public class UserMappingController {
  */
 
 //CHARACTERSHEET USER GETS (GRUPPENUNABHÄNGIG)____________________________________________
+    @CrossOrigin
     @GetMapping("/{userid}/Charactersheets/all")
     public @ResponseBody
-    Set<Charactersheet> getAllCharactersheets(@PathVariable int userid ) {
-        if(userid != 0)
+    Set<Charactersheet> getAllCharactersheets(@PathVariable int userid) {
+        if (userid != 0)
             return charactersheetRepository.findAllCharactersheets(userid);
         else
             return null;
@@ -63,8 +68,8 @@ public class UserMappingController {
 
     @GetMapping("/{userid}/Charactersheets/{characterid}")
     public @ResponseBody
-    Charactersheet getAllCharactersheets(@PathVariable int userid , @PathVariable int characterid) {
-        if(userid != 0 && characterid != 0 )
+    Charactersheet getAllCharactersheets(@PathVariable int userid, @PathVariable int characterid) {
+        if (userid != 0 && characterid != 0)
             return charactersheetRepository.findCharactersheetByID(characterid);
         else
             return null;
@@ -78,30 +83,41 @@ public class UserMappingController {
     // MANAGE USER
 
     @PostMapping(
-            path = "/register"
-            //consumes = {MediaType.APPLICATION_JSON_VALUE}
+            path = "/register",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     //@ResponseStatus(HttpStatus.OK)
-    public @ResponseBody String postUser(@RequestBody User user) {
-        if(user != null)
-            userRepository.save(user);
+    @CrossOrigin
+    public @ResponseBody
+    User postUser(@RequestBody User user) {
+        try {
+            if (user == null)
+                throw new Exception();
 
-        return "Account " + user.getName() + " wurde angelegt";
+            userRepository.save(user);
+            return user;
+
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 
 
+    @PostMapping(
+            path = "/login",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    @CrossOrigin
+    public @ResponseBody
+    User loginUser(@RequestBody UserViewModel userViewModel) {
 
-//    @PostMapping(
-//            path = "/login",
-//            consumes = {MediaType.APPLICATION_JSON_VALUE}
-//    )
-//    @ResponseStatus(HttpStatus.OK)
-//    public int loginUser() {
-//        int localID = 0;
-//
-//
-//        return localID;
-//    }
+            String name =  userViewModel.getUsername();
+            User u = userRepository.findUserByName(name);
+            if (u==null) return null;
+            if (!u.getPassword().equals(userViewModel.getPassword())) return null;
+            return u;
+    }
 //
 //    @PutMapping(
 //            path = "/{id}",
@@ -124,9 +140,10 @@ public class UserMappingController {
 //    }
 //
 //    @DeleteMapping(
-//            path = ("/{id}")
+//            path = ("/{userid}")
 //    )
-//    public String deleteUser(@PathVariable int id) {
+//    public @ResponseBody String deleteUser(@PathVariable int userid) {
+//        userRepository.delete(userRepository.findUserByID(userid));
 //        return "Account wurde gelöscht";
 //    }
 }
