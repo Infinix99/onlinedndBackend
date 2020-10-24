@@ -177,9 +177,9 @@ public class CharactersheetMappingController {
     public @ResponseBody String
     putCharacterSheetToGroup(@PathVariable int characterid, @PathVariable int groupid) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
-        charactersheet.setGroupID(groupid);
-
         Group group = groupRepository.findGroupByID(groupid);
+        charactersheet.setGroup(group);
+
 
         charactersheetRepository.save(charactersheet);
 
@@ -192,7 +192,8 @@ public class CharactersheetMappingController {
     public @ResponseBody String
     removeCharFromGroup(@PathVariable int characterid, @PathVariable int groupid) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
-        charactersheet.setGroupID(1);
+        Group group = groupRepository.findGroupByID(0);
+        charactersheet.setGroup(group);
         charactersheetRepository.save(charactersheet);
 
         return "Charactersheet " +charactersheet.getCharacterName()+" has been removed from the Group";
