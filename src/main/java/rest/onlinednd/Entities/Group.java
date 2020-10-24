@@ -22,6 +22,8 @@ public class Group {
     @ManyToMany(mappedBy = "group_chars")
     Set<Charactersheet> charactersheets;
 
+    @OneToOne(mappedBy = "group")
+    private Charactersheet charactersheet;
 
 
     @OneToMany(mappedBy = "invitingGroup")

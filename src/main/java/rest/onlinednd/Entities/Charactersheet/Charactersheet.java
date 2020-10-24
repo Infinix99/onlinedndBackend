@@ -370,5 +370,19 @@ public class Charactersheet {
     public void setGroup_chars(Set<Group> group_chars) {
         this.group_chars = group_chars;
     }
+
+
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn
+    private Group group;
+
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 }
 

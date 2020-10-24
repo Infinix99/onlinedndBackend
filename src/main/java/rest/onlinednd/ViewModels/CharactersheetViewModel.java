@@ -2,6 +2,7 @@ package rest.onlinednd.ViewModels;
 
 
 import rest.onlinednd.Entities.Charactersheet.*;
+import rest.onlinednd.Entities.Group;
 
 import java.util.Set;
 
@@ -14,7 +15,7 @@ public class CharactersheetViewModel {
     private int passivePerception;
     private int level;
     private boolean sheetIsVisible;
-    private int groupID;
+
 
     private String combatClass;
     private String race;
@@ -29,6 +30,7 @@ public class CharactersheetViewModel {
     private ToolProficiencies toolProficiencies;
     private WeaponProficiencies weaponProficiencies;
     private SavingThrows savingThrows;
+    private Group group;
 
 
     public CharactersheetViewModel() {
@@ -120,12 +122,12 @@ public class CharactersheetViewModel {
         sheetIsVisible = visible;
     }
 
-    public int getGroupID() {
-        return groupID;
+    public Group getGroup() {
+        return group;
     }
 
-    public void setGroupID(int group) {
-        this.groupID = group;
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public Stats getStats() {
