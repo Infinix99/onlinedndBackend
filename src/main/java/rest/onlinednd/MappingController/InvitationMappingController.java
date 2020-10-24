@@ -85,6 +85,7 @@ public class InvitationMappingController {
     deleteInvitation(@PathVariable int invid) {
 
         Invitation invitation = invitationRepository.findInvByID(invid);
+
         User invitingUser = invitation.getInvitingUser();
         User invitedUser = invitation.getInvitedUser();
         Group invitingGroup = invitation.getInvitingGroup();
@@ -93,10 +94,11 @@ public class InvitationMappingController {
         invitedUser.removeInvitedIn(invitation);
         invitingGroup.removeInviting(invitation);
 
-        invitationRepository.delete(invitation);
+
         userRepository.save(invitingUser);
         userRepository.save(invitedUser);
         groupRepository.save(invitingGroup);
+        invitationRepository.delete(invitation);
 
 
         return "Invitation has been deleted";
