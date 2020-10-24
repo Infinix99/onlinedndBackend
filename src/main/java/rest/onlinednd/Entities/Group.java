@@ -19,8 +19,6 @@ public class Group {
     @ManyToMany(mappedBy = "groups")
     Set<User> users;
 
-
-
     @OneToOne(mappedBy = "group")
     private Charactersheet charactersheet;
 
