@@ -36,6 +36,20 @@ public class Invitation {
 
     private String invitingGroupname;
 
+    private int GroupID;
+
+
+
+
+
+
+    public int getGroupID() {
+        return GroupID;
+    }
+
+    public void setGroupID(int groupID) {
+        GroupID = groupID;
+    }
 
     public String getInvitedUsername() {
         return invitedUsername;

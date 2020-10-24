@@ -57,6 +57,7 @@ public class InvitationMappingController {
         invitation.setInvitingGroup(invitingGroup);
         invitation.setInvitingGroupname(invitingGroup.getName());
 
+        invitation.setGroupID(groupid);
 
         Set<Invitation> inviting = invitingUser.getInviteList();
         inviting.add(invitation);
