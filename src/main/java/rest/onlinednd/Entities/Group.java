@@ -19,8 +19,7 @@ public class Group {
     @ManyToMany(mappedBy = "groups")
     Set<User> users;
 
-    @ManyToMany(mappedBy = "group_chars")
-    Set<Charactersheet> charactersheets;
+
 
     @OneToOne(mappedBy = "group")
     private Charactersheet charactersheet;
@@ -52,12 +51,12 @@ public class Group {
         this.groupID = groupID;
     }
 
-    public Set<Charactersheet> getCharactersheets() {
-        return charactersheets;
+    public Charactersheet getCharactersheet() {
+        return charactersheet;
     }
 
-    public void setCharactersheets(Set<Charactersheet> charactersheets) {
-        this.charactersheets = charactersheets;
+    public void setCharactersheet(Charactersheet charactersheet) {
+        this.charactersheet = charactersheet;
     }
 
     public Set<User> getUsers() {
