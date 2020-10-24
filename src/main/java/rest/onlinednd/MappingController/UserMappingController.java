@@ -77,10 +77,7 @@ public class UserMappingController {
 
 //________________________________________________________________________________________
 
-    //TODO:
-    // CREATE USER
-    // DELETE USER
-    // MANAGE USER
+
 
     @PostMapping(
             path = "/register",

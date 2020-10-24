@@ -49,13 +49,14 @@ public class GroupMappingController {
     public @ResponseBody String
     postCreateGroup(@RequestBody GroupViewModel groupViewModel, @PathVariable int userid) {
         Group group = new Group();
+
+        User user = userRepository.findUserByID(userid);
         group.setName(groupViewModel.getName());
         //_________________________________________
 
-        Set<Group> groupSet = new HashSet<Group>();
+//        Set<Group> groupSet = new HashSet<Group>();
+        Set<Group> groupSet = user.getGroups();
         groupSet.add(group);
-
-        User user = userRepository.findUserByID(userid);
 
         user.setGroups(groupSet);
         groupRepository.save(group);
