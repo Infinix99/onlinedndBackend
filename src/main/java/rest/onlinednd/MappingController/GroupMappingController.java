@@ -93,6 +93,7 @@ public class GroupMappingController {
 
     // REMOVE USER FROM GROUP
 
+    @CrossOrigin
     @DeleteMapping("/{groupid}/removeFromGroup")
     public @ResponseBody String
     putRemoveFromGroup(@PathVariable int userid, @PathVariable int groupid) {
