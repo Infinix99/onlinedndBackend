@@ -80,12 +80,14 @@ public class CharactersheetMappingController {
 
 
 
+    // POST CHARSHEET
+    @CrossOrigin
     @PostMapping
-    public @ResponseBody String
+    public @ResponseBody int
     postCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel, @PathVariable int userid, @PathVariable int groupid) {
         Charactersheet charactersheet = new Charactersheet();
 
-        String returnString;
+        int returnInt;
         if(charactersheetViewModel != null) {
             charactersheet.setLevel(charactersheetViewModel.getLevel());
             charactersheet.setArmorClass(charactersheetViewModel.getArmorClass());
@@ -107,10 +109,8 @@ public class CharactersheetMappingController {
             charactersheet.setToolProficiencies(charactersheetViewModel.getToolProficiencies());
             charactersheet.setWeaponProficiencies(charactersheetViewModel.getWeaponProficiencies());
             charactersheet.setSavingThrows(charactersheetViewModel.getSavingThrows());
-            charactersheet.setNotes(charactersheetViewModel.getNotes());
 
 
-            charactersheet.setGroupID(1);
 
 
             User user = userRepository.findUserByID(userid);
@@ -118,13 +118,56 @@ public class CharactersheetMappingController {
 
             charactersheetRepository.save(charactersheet);
 
-            returnString ="Charakterbogen erstellt";
+            returnInt = charactersheet.getCharactersheetID();
         }
 
         else {
-            returnString = "Nichts gespeichert!"; }
+            returnInt = -1; }
 
-        return returnString;
+        return returnInt;
+    }
+
+    // PUT CHARSHEET
+    @CrossOrigin
+    @PutMapping(
+            path = "{characterid}/update",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    public @ResponseBody int
+    putCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel, @PathVariable int userid, @PathVariable int characterid) {
+        Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
+        int returnInt;
+        if(charactersheetViewModel != null) {
+            charactersheet.setLevel(charactersheetViewModel.getLevel());
+            charactersheet.setArmorClass(charactersheetViewModel.getArmorClass());
+            charactersheet.setCharacterName(charactersheetViewModel.getCharacterName());
+            charactersheet.setInitiative(charactersheetViewModel.getInitiative());
+            charactersheet.setPassivePerception(charactersheetViewModel.getPassivePerception());
+            charactersheet.setProficiencyBonus(charactersheetViewModel.getProficiencyBonus());
+            charactersheet.setSpeed(charactersheetViewModel.getSpeed());
+            charactersheet.setSheetIsVisible(charactersheetViewModel.isSheetIsVisible());
+            charactersheet.setRace(charactersheetViewModel.getRace());
+            charactersheet.setCombatClass(charactersheetViewModel.getCombatClass());
+            charactersheet.setStats(charactersheetViewModel.getStats());
+            charactersheet.setSkills(charactersheetViewModel.getSkills());
+            charactersheet.setLife(charactersheetViewModel.getLife());
+            charactersheet.setTreasure(charactersheetViewModel.getTreasure());
+            charactersheet.setCharacterDescription(charactersheetViewModel.getCharacterDescription());
+            charactersheet.setArmorProficiencies(charactersheetViewModel.getArmorProficiencies());
+            charactersheet.setLanguageProficiencies(charactersheetViewModel.getLanguageProficiencies());
+            charactersheet.setToolProficiencies(charactersheetViewModel.getToolProficiencies());
+            charactersheet.setWeaponProficiencies(charactersheetViewModel.getWeaponProficiencies());
+
+
+            charactersheetRepository.save(charactersheet);
+
+            returnInt = charactersheet.getCharactersheetID();
+        }
+        else {
+            returnInt = -1;
+        }
+
+        return returnInt;
     }
 
     // ADD CHARACTERSHEET TO A GROUP VIA GROUP ID
@@ -485,6 +528,7 @@ public class CharactersheetMappingController {
         notesRepository.save(notes);
     }
 
+    @CrossOrigin
     @DeleteMapping(
             path = "/{characterid}/notes/{notesid}/delete"
     )
@@ -506,6 +550,7 @@ public class CharactersheetMappingController {
         return equippableRepository.findAllEquippablesFromSheet(characterid);
     }
 
+    @CrossOrigin
     @PostMapping(
             path = "/{characterid}/equippable"
     )
@@ -526,6 +571,7 @@ public class CharactersheetMappingController {
         return returnString;
     }
 
+    @CrossOrigin
     @PutMapping(
             path = "/{characterid}/equippable/{equippableid}"
     )
@@ -536,6 +582,7 @@ public class CharactersheetMappingController {
         equippableRepository.save(equippable);
     }
 
+    @CrossOrigin
     @DeleteMapping(
             path = "/{characterid}/equippable/{equippableid}/delete"
     )
@@ -559,6 +606,7 @@ public class CharactersheetMappingController {
         return wearableRepository.findAllWearableFromSheet(characterid);
     }
 
+    @CrossOrigin
     @PostMapping(
             path = "/{characterid}/wearable"
     )
@@ -579,6 +627,7 @@ public class CharactersheetMappingController {
         return returnString;
     }
 
+    @CrossOrigin
     @PutMapping(
             path = "/{characterid}/wearable/{wearableid}"
     )
@@ -589,6 +638,7 @@ public class CharactersheetMappingController {
         wearableRepository.save(wearable);
     }
 
+    @CrossOrigin
     @DeleteMapping(
             path = "/{characterid}/wearable/{wearableid}/delete"
     )
@@ -612,6 +662,7 @@ public class CharactersheetMappingController {
         return carryableRepository.findAllCarryablesFromSheet(characterid);
     }
 
+    @CrossOrigin
     @PostMapping(
             path = "/{characterid}/carryable"
     )
@@ -631,6 +682,7 @@ public class CharactersheetMappingController {
         return returnString;
     }
 
+    @CrossOrigin
     @PutMapping(
             path = "/{characterid}/carryable/{carryableid}"
     )
@@ -642,6 +694,7 @@ public class CharactersheetMappingController {
         carryableRepository.save(carryable);
     }
 
+    @CrossOrigin
     @DeleteMapping(
             path = "/{characterid}/carryable/{carryableid}/delete"
     )
