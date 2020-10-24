@@ -95,7 +95,7 @@ public class GroupMappingController {
 
     @DeleteMapping("/{groupid}/removeFromGroup")
     public @ResponseBody String
-    putRemoveFromGroup(@PathVariable int userid, @PathVariable int groupid) {
+    deleteRemoveFromGroup(@PathVariable int userid, @PathVariable int groupid) {
         User user = userRepository.findUserByID(userid);
         Group group = groupRepository.findGroupByID(groupid);
 

@@ -37,6 +37,22 @@ public class Invitation {
     private String invitingGroupname;
 
 
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public String getInvitedUsername() {
         return invitedUsername;
     }
