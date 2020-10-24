@@ -79,7 +79,7 @@ public class InvitationMappingController {
 
 
     }
-
+    @CrossOrigin
     @DeleteMapping("/{invid}/delete")
     public @ResponseBody String
     deleteInvitation(@PathVariable int invid) {
