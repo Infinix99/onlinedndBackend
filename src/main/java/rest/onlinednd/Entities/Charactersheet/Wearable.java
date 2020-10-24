@@ -20,8 +20,8 @@ public class Wearable {
 
 
 
-    private String wearable;
-    private String details;
+    private String wearable;        // NAME
+    private String details;         // Beschreibung
     private int armorClass;
 
     public Wearable() {

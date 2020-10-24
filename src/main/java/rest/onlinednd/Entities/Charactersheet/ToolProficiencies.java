@@ -29,7 +29,7 @@ public class ToolProficiencies {
     private boolean forgeryKit;
     private boolean glassblowerTools;
     private boolean herbalismKit;
-    private boolean horn;
+    private boolean horn;           //-------
     private boolean jewelersTools;
     private boolean landVehicles;
     private boolean leatherworkerTools;
