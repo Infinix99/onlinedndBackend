@@ -21,6 +21,10 @@ public interface GroupRepository extends CrudRepository<Group, Integer> {
             ,nativeQuery = true)
     Set<Group> findGroupByUserID(@Param("userid") int userid);
 
+    //Find Groupname by ID
+    @Query(value = "select name from group_table g where g.groupid = :Groupid"
+            ,nativeQuery = true)
+    String findGroupNameByID(@Param("Groupid") int Groupid);
 
 
 

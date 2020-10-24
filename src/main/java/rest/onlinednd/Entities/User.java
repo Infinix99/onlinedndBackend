@@ -3,6 +3,7 @@ package rest.onlinednd.Entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
+import rest.onlinednd.Entities.Charactersheet.Invitation;
 import rest.onlinednd.Entities.Charactersheet.Notes;
 
 import javax.persistence.*;
@@ -25,6 +26,17 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonManagedReference
     private Set<Charactersheet> charactersheets;
+
+
+    @OneToMany(mappedBy = "invitingUser")
+    @JsonManagedReference
+    private Set<Invitation> inviteList;
+
+    @OneToMany(mappedBy = "invitedUser")
+    @JsonManagedReference
+    private Set<Invitation> invitedInList;
+
+
 
     @ManyToMany
     Set<Group> groups;
@@ -100,5 +112,24 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public Set<Invitation> getInviteList() {
+        return inviteList;
+    }
+
+
+
+    public void setInviteList(Set<Invitation> inviteList) {
+        this.inviteList = inviteList;
+    }
+
+    public Set<Invitation> getInvitedInList() {
+        return invitedInList;
+    }
+
+    public void setInvitedInList(Set<Invitation> invitedInList) {
+        this.invitedInList = invitedInList;
     }
 }

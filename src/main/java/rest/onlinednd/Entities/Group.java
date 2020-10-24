@@ -1,7 +1,9 @@
 package rest.onlinednd.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
+import rest.onlinednd.Entities.Charactersheet.Invitation;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -19,6 +21,12 @@ public class Group {
 
     @ManyToMany(mappedBy = "group_chars")
     Set<Charactersheet> charactersheets;
+
+
+
+    @OneToMany(mappedBy = "invitingGroup")
+    @JsonManagedReference
+    private Set<Invitation> invitationsGroup;
 
 
     private String name;
@@ -68,5 +76,13 @@ public class Group {
 
     public void removeUser(User user) {
         users.remove(user);
+    }
+
+    public Set<Invitation> getInvitationsGroup() {
+        return invitationsGroup;
+    }
+
+    public void setInvitationsGroup(Set<Invitation> invitationsGroup) {
+        this.invitationsGroup = invitationsGroup;
     }
 }
