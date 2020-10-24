@@ -29,7 +29,6 @@ public class CharactersheetViewModel {
     private ToolProficiencies toolProficiencies;
     private WeaponProficiencies weaponProficiencies;
     private SavingThrows savingThrows;
-    private Set<Notes> notes;
 
 
     public CharactersheetViewModel() {
@@ -209,11 +208,5 @@ public class CharactersheetViewModel {
         this.savingThrows = savingThrows;
     }
 
-    public Set<Notes> getNotes() {
-        return notes;
-    }
 
-    public void setNotes(Set<Notes> notes) {
-        this.notes = notes;
-    }
 }

@@ -12,7 +12,7 @@ public class LanguageProficiencies {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer languageProfID;
 
-    private boolean CelestialAbyssal;
+    private boolean Abyssal;
     private boolean Celestial;
     private boolean Common;
     private boolean DeepSpeech;
@@ -34,12 +34,13 @@ public class LanguageProficiencies {
 
     //__________________________________________________________________
 
-    public boolean isCelestialAbyssal() {
-        return CelestialAbyssal;
+
+    public boolean isAbyssal() {
+        return Abyssal;
     }
 
-    public void setCelestialAbyssal(boolean celestialAbyssal) {
-        CelestialAbyssal = celestialAbyssal;
+    public void setAbyssal(boolean abyssal) {
+        Abyssal = abyssal;
     }
 
     public boolean isCelestial() {
