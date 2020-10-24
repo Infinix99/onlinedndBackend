@@ -66,8 +66,6 @@ public class UserMappingController {
             return null;
     }
 
-
-
     @GetMapping("/{userid}/Charactersheets/{characterid}")
     public @ResponseBody
     Charactersheet getAllCharactersheets(@PathVariable int userid, @PathVariable int characterid) {
@@ -95,6 +93,8 @@ public class UserMappingController {
         try {
             if (user == null)
                 throw new Exception();
+            if(userRepository.findUserByName(user.getName()) != null)
+                throw new Exception();
 
             userRepository.save(user);
             return user;
@@ -102,7 +102,40 @@ public class UserMappingController {
         } catch (Exception e) {
             return null;
         }
+    }
 
+    @PostMapping(
+            path = "/editEmail",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    //@ResponseStatus(HttpStatus.OK)
+    @CrossOrigin
+    public @ResponseBody
+    User changeEmail(@RequestBody UserViewModel userViewModel) {
+
+        int userid = userViewModel.getUserid();
+        String email =  userViewModel.getEmail();
+        User u = userRepository.findUserByID(userid);
+        u.setEmail(email);
+        userRepository.save(u);
+        return u;
+    }
+
+    @PostMapping(
+            path = "/editPassword",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    //@ResponseStatus(HttpStatus.OK)
+    @CrossOrigin
+    public @ResponseBody
+    User changePassword(@RequestBody UserViewModel userViewModel) {
+
+        int userid = userViewModel.getUserid();
+        String password =  userViewModel.getPassword();
+        User u = userRepository.findUserByID(userid);
+        u.setPassword(password);
+        userRepository.save(u);
+        return u;
     }
 
 
