@@ -39,7 +39,7 @@ public class InvitationMappingController {
     )
     public @ResponseBody
     String
-    postCreateGroup(@PathVariable int userid,@PathVariable int groupid, @PathVariable String userName) {
+    postCreateInvitation(@PathVariable int userid,@PathVariable int groupid, @PathVariable String userName) {
 
         Invitation invitation = new Invitation();
 
@@ -78,5 +78,38 @@ public class InvitationMappingController {
 
 
     }
+
+    @DeleteMapping("/{invid}/delete")
+    public @ResponseBody String
+    deleteInvitation(@PathVariable int invid) {
+
+        Invitation invitation = invitationRepository.findInvByID(invid);
+        User invitingUser = invitation.getInvitingUser();
+        User invitedUser = invitation.getInvitedUser();
+        Group invitingGroup = invitation.getInvitingGroup();
+
+        invitingUser.removeInviting(invitation);
+        invitedUser.removeInvitedIn(invitation);
+        invitingGroup.removeInviting(invitation);
+
+        invitationRepository.delete(invitation);
+        userRepository.save(invitingUser);
+        userRepository.save(invitedUser);
+        groupRepository.save(invitingGroup);
+
+
+        return "Invitation has been deleted";
+
+    }
+
+    @GetMapping("/{invid}")
+    public @ResponseBody Invitation
+    getAllInvitation(@PathVariable int invid) {
+        if (invid != 0 )
+            return invitationRepository.findInvByID(invid);
+        else
+            return null;
+    }
+
 
 }

@@ -85,4 +85,9 @@ public class Group {
     public void setInvitationsGroup(Set<Invitation> invitationsGroup) {
         this.invitationsGroup = invitationsGroup;
     }
+
+    public Set<Invitation> removeInviting (Invitation invitation){
+        this.invitationsGroup.remove(invitation);
+        return invitationsGroup;
+    }
 }

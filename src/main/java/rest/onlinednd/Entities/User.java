@@ -132,4 +132,14 @@ public class User {
     public void setInvitedInList(Set<Invitation> invitedInList) {
         this.invitedInList = invitedInList;
     }
+
+    public Set<Invitation> removeInvitedIn(Invitation invitation){
+        this.invitedInList.remove(invitation);
+        return invitedInList;
+    }
+
+    public Set<Invitation> removeInviting(Invitation invitation){
+        this.inviteList.remove(invitation);
+        return inviteList;
+    }
 }
