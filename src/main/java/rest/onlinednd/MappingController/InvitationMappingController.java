@@ -95,6 +95,9 @@ public class InvitationMappingController {
         invitedUser.removeInvitedIn(invitation);
         invitingGroup.removeInviting(invitation);
 
+        invitation.setInvitedUser(null);
+        invitation.setInvitingUser(null);
+        invitation.setInvitingGroup(null);
 
         userRepository.save(invitingUser);
         userRepository.save(invitedUser);
