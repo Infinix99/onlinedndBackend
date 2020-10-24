@@ -19,10 +19,6 @@ public class Group {
     @ManyToMany(mappedBy = "groups")
     Set<User> users;
 
-    @OneToOne(mappedBy = "group")
-    private Charactersheet charactersheet;
-
-
     @OneToMany(mappedBy = "invitingGroup")
     @JsonManagedReference
     private Set<Invitation> invitationsGroup;
@@ -47,14 +43,6 @@ public class Group {
 
     public void setGroupID(Integer groupID) {
         this.groupID = groupID;
-    }
-
-    public Charactersheet getCharactersheet() {
-        return charactersheet;
-    }
-
-    public void setCharactersheet(Charactersheet charactersheet) {
-        this.charactersheet = charactersheet;
     }
 
     public Set<User> getUsers() {

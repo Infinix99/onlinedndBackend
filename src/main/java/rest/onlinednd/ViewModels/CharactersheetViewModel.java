@@ -30,7 +30,6 @@ public class CharactersheetViewModel {
     private ToolProficiencies toolProficiencies;
     private WeaponProficiencies weaponProficiencies;
     private SavingThrows savingThrows;
-    private Group group;
 
 
     public CharactersheetViewModel() {
@@ -40,6 +39,8 @@ public class CharactersheetViewModel {
 
 
     //_________________GETTER & SETTER_________________\\
+
+
 
 
     public String getCombatClass() {
@@ -120,14 +121,6 @@ public class CharactersheetViewModel {
 
     public void setSheetIsVisible(boolean visible) {
         sheetIsVisible = visible;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
     }
 
     public Stats getStats() {

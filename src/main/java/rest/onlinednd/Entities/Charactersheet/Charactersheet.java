@@ -360,16 +360,6 @@ public class Charactersheet {
         this.user = user;
     }
 
-    @ManyToMany
-    Set<Group> group_chars;
-
-    public Set<Group> getGroup_chars() {
-        return group_chars;
-    }
-
-    public void setGroup_chars(Set<Group> group_chars) {
-        this.group_chars = group_chars;
-    }
 
 
     @OneToOne(cascade = {CascadeType.ALL})

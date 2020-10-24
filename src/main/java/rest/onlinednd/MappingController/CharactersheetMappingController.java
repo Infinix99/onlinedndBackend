@@ -17,8 +17,11 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-@RestController
-@RequestMapping("/api/v1.0/User/{userid}/Group/{groupid}/Charactersheet")
+@RestController ()
+@RequestMapping(
+        path = "/api/v1.0/User/{userid}/Group/{groupid}/Charactersheet",
+        consumes = {MediaType.APPLICATION_JSON_VALUE}
+        )
 public class CharactersheetMappingController {
 
 
@@ -82,7 +85,9 @@ public class CharactersheetMappingController {
 
     // POST CHARSHEET
     @CrossOrigin
-    @PostMapping
+    @PostMapping(
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+            )
     public @ResponseBody int
     postCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel, @PathVariable int userid, @PathVariable int groupid) {
         Charactersheet charactersheet = new Charactersheet();
