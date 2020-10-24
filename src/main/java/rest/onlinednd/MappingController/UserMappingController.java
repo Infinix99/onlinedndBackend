@@ -5,10 +5,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import rest.onlinednd.Entities.Charactersheet.Charactersheet;
+import rest.onlinednd.Entities.Charactersheet.Invitation;
 import rest.onlinednd.Entities.Group;
 import rest.onlinednd.Entities.User;
 import rest.onlinednd.Repositories.Charactersheet.CharactersheetRepository;
 import rest.onlinednd.Repositories.GroupRepository;
+import rest.onlinednd.Repositories.InvitationRepository;
 import rest.onlinednd.Repositories.UserRepository;
 import rest.onlinednd.ViewModels.UserViewModel;
 
@@ -27,7 +29,8 @@ public class UserMappingController {
     private CharactersheetRepository charactersheetRepository;
     @Autowired
     private GroupRepository groupRepository;
-
+    @Autowired
+    private InvitationRepository invitationRepository;
 
     @GetMapping("/{id}")
     @CrossOrigin
@@ -74,6 +77,20 @@ public class UserMappingController {
         else
             return null;
     }
+
+
+//GET ALL INVITATIONS FROM USER___________________________________________________________
+
+    @CrossOrigin
+    @GetMapping("/{userid}/ViewInvites")
+    public @ResponseBody
+    Set<Invitation> getAllInvitationsFromUser(@PathVariable int userid ) {
+        if(userid != 0)
+            return invitationRepository.findInvitationByUserID(userid);
+        else
+            return null;
+    }
+
 
 //________________________________________________________________________________________
 
