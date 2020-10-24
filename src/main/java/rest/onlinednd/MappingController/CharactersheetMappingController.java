@@ -201,7 +201,7 @@ public class CharactersheetMappingController {
     public @ResponseBody String
     removeCharFromGroup(@PathVariable int characterid, @PathVariable int groupid) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
-        Group group = groupRepository.findGroupByID(0);
+        Group group = groupRepository.findGroupByID(1);
         charactersheet.setGroup(group);
         charactersheetRepository.save(charactersheet);
 
