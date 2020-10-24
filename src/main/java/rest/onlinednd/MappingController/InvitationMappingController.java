@@ -34,8 +34,8 @@ public class InvitationMappingController {
 
     @CrossOrigin
     @PostMapping(
-            path ="/create/{userName}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE}
+            path ="/create/{userName}"
+
     )
     public @ResponseBody
     String
