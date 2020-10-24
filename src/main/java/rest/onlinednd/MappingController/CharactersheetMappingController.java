@@ -110,6 +110,7 @@ public class CharactersheetMappingController {
             charactersheet.setWeaponProficiencies(charactersheetViewModel.getWeaponProficiencies());
             charactersheet.setSavingThrows(charactersheetViewModel.getSavingThrows());
 
+            charactersheet.setGroup(charactersheetViewModel.getGroup());
 
 
 
