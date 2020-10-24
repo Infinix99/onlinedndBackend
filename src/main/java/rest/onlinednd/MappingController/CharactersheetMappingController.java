@@ -110,7 +110,9 @@ public class CharactersheetMappingController {
             charactersheet.setWeaponProficiencies(charactersheetViewModel.getWeaponProficiencies());
             charactersheet.setSavingThrows(charactersheetViewModel.getSavingThrows());
 
-            charactersheet.setGroup(charactersheetViewModel.getGroup());
+            Group group = groupRepository.findGroupByID(groupid);
+            charactersheet.setGroup(group);
+
 
 
 
@@ -135,7 +137,7 @@ public class CharactersheetMappingController {
             consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public @ResponseBody int
-    putCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel, @PathVariable int userid, @PathVariable int characterid) {
+    putCharactersheet(@RequestBody CharactersheetViewModel charactersheetViewModel, @PathVariable int userid, @PathVariable int characterid, @PathVariable int groupid) {
         Charactersheet charactersheet = charactersheetRepository.findCharactersheetByID(characterid);
         int returnInt;
         if(charactersheetViewModel != null) {
@@ -158,7 +160,9 @@ public class CharactersheetMappingController {
             charactersheet.setLanguageProficiencies(charactersheetViewModel.getLanguageProficiencies());
             charactersheet.setToolProficiencies(charactersheetViewModel.getToolProficiencies());
             charactersheet.setWeaponProficiencies(charactersheetViewModel.getWeaponProficiencies());
-            charactersheet.setGroup(charactersheetViewModel.getGroup());
+
+            Group group = groupRepository.findGroupByID(groupid);
+            charactersheet.setGroup(group);
 
 
             charactersheetRepository.save(charactersheet);
