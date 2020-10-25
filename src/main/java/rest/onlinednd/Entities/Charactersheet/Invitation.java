@@ -22,12 +22,7 @@ public class Invitation {
     private String invitedUsername;
 
 
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn
-    @JsonBackReference
-    private User invitingUser;
 
-    private String invitingUsername;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn
@@ -59,13 +54,6 @@ public class Invitation {
         this.invitedUsername = invitedUsername;
     }
 
-    public String getInvitingUsername() {
-        return invitingUsername;
-    }
-
-    public void setInvitingUsername(String invitingUsername) {
-        this.invitingUsername = invitingUsername;
-    }
 
     public String getInvitingGroupname() {
         return invitingGroupname;
@@ -91,13 +79,7 @@ public class Invitation {
         this.invitedUser = invitedUser;
     }
 
-    public User getInvitingUser() {
-        return invitingUser;
-    }
 
-    public void setInvitingUser(User invitingUser) {
-        this.invitingUser = invitingUser;
-    }
 
     public Group getInvitingGroup() {
         return invitingGroup;
