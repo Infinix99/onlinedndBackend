@@ -30,9 +30,7 @@ public class User {
     //SHEEETSSSSSS
 
 
-    @OneToMany(mappedBy = "invitingUser")
-    @JsonManagedReference
-    private Set<Invitation> inviteList;
+
 
     @OneToMany(mappedBy = "invitedUser")
     @JsonManagedReference
@@ -117,15 +115,7 @@ public class User {
     }
 
 
-    public Set<Invitation> getInviteList() {
-        return inviteList;
-    }
 
-
-
-    public void setInviteList(Set<Invitation> inviteList) {
-        this.inviteList = inviteList;
-    }
 
     public Set<Invitation> getInvitedInList() {
         return invitedInList;
@@ -140,8 +130,5 @@ public class User {
         return invitedInList;
     }
 
-    public Set<Invitation> removeInviting(Invitation invitation){
-        this.inviteList.remove(invitation);
-        return inviteList;
-    }
+
 }
