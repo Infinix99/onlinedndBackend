@@ -27,6 +27,8 @@ public class User {
     @JsonManagedReference
     private Set<Charactersheet> charactersheets;
 
+    //SHEEETSSSSSS
+
 
     @OneToMany(mappedBy = "invitingUser")
     @JsonManagedReference
