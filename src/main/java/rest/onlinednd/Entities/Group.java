@@ -20,7 +20,7 @@ public class Group {
     Set<User> users;
 
     @OneToMany(mappedBy = "invitingGroup")
-    @JsonManagedReference
+    @JsonManagedReference(value = "group-invitation")
     private Set<Invitation> invitationsGroup;
 
 

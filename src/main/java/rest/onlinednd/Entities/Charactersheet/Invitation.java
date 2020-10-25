@@ -16,7 +16,7 @@ public class Invitation {
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn
-    @JsonBackReference
+    @JsonBackReference(value="user-invitation")
     private User invitedUser;
 
     private String invitedUsername;
@@ -26,7 +26,7 @@ public class Invitation {
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn
-    @JsonBackReference
+    @JsonBackReference(value = "group-invitation")
     private Group invitingGroup;
 
     private String invitingGroupname;

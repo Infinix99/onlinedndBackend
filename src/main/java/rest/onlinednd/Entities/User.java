@@ -33,7 +33,7 @@ public class User {
 
 
     @OneToMany(mappedBy = "invitedUser")
-    @JsonManagedReference
+    @JsonManagedReference(value="user-invitation")
     private Set<Invitation> invitedInList;
 
 
