@@ -23,14 +23,7 @@ public class User {
 
     private String password;
 
-    @OneToMany(mappedBy = "user")
-    @JsonManagedReference
-    private Set<Charactersheet> charactersheets;
 
-
-    @OneToMany(mappedBy = "invitingUser")
-    @JsonManagedReference
-    private Set<Invitation> inviteList;
 
     @OneToMany(mappedBy = "invitedUser")
     @JsonManagedReference
@@ -45,13 +38,6 @@ public class User {
 
     //---------------Getter Setter---------------------------------------------------
 
-    public Set<Charactersheet> getCharactersheets() {
-        return charactersheets;
-    }
-
-    public void setCharactersheets(Set<Charactersheet> charactersheets) {
-        this.charactersheets = charactersheets;
-    }
 
     public Integer getId() {
         return UserID;
@@ -115,15 +101,6 @@ public class User {
     }
 
 
-    public Set<Invitation> getInviteList() {
-        return inviteList;
-    }
-
-
-
-    public void setInviteList(Set<Invitation> inviteList) {
-        this.inviteList = inviteList;
-    }
 
     public Set<Invitation> getInvitedInList() {
         return invitedInList;
@@ -136,10 +113,5 @@ public class User {
     public Set<Invitation> removeInvitedIn(Invitation invitation){
         this.invitedInList.remove(invitation);
         return invitedInList;
-    }
-
-    public Set<Invitation> removeInviting(Invitation invitation){
-        this.inviteList.remove(invitation);
-        return inviteList;
     }
 }

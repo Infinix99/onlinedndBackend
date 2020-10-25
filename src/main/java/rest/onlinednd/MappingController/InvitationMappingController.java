@@ -43,13 +43,12 @@ public class InvitationMappingController {
 
         Invitation invitation = new Invitation();
 
-        User invitingUser = userRepository.findUserByID(userid);
+
         User invitedUser = userRepository.findUserByName(userName);
         Group invitingGroup = groupRepository.findGroupByID(groupid);
 
 
-        invitation.setInvitingUser(invitingUser);
-        invitation.setInvitingUsername(invitingUser.getName());
+
 
         invitation.setInvitedUser(invitedUser);
         invitation.setInvitedUsername(invitedUser.getName());
@@ -59,10 +58,9 @@ public class InvitationMappingController {
 
         invitation.setGroupID(groupid);
 
-        Set<Invitation> inviting = invitingUser.getInviteList();
-        inviting.add(invitation);
 
-        Set<Invitation> invited = invitedUser.getInviteList();
+
+        Set<Invitation> invited = invitedUser.getInvitedInList();
         invited.add(invitation);
 
         Set<Invitation> inv = invitingGroup.getInvitationsGroup();
@@ -70,7 +68,7 @@ public class InvitationMappingController {
 
 
         invitationRepository.save(invitation);
-        userRepository.save(invitingUser);
+
         userRepository.save(invitedUser);
         groupRepository.save(invitingGroup);
 
@@ -87,19 +85,18 @@ public class InvitationMappingController {
 
         Invitation invitation = invitationRepository.findInvByID(invid);
 
-        User invitingUser = invitation.getInvitingUser();
+
         User invitedUser = invitation.getInvitedUser();
         Group invitingGroup = invitation.getInvitingGroup();
 
-        invitingUser.removeInviting(invitation);
         invitedUser.removeInvitedIn(invitation);
         invitingGroup.removeInviting(invitation);
 
         invitation.setInvitedUser(null);
-        invitation.setInvitingUser(null);
+
         invitation.setInvitingGroup(null);
 
-        userRepository.save(invitingUser);
+
         userRepository.save(invitedUser);
         groupRepository.save(invitingGroup);
         invitationRepository.delete(invitation);
